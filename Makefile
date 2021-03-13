@@ -6,7 +6,7 @@
 #    By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/18 16:49:25 by dlanotte          #+#    #+#              #
-#    Updated: 2021/02/18 18:12:43 by dlanotte         ###   ########.fr        #
+#    Updated: 2021/03/01 14:52:34 by dlanotte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(SRC) $(SRCL) $(SRCG) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 debug: 
 	$(CC) $(CFLAGS) -g $(SRC) $(SRCL) $(SRCG) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+bau: 
+	$(CC) -g $(SRC) $(SRCL) $(SRCG) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 clean:
 	rm -f ${OBJ} ${OBJL} ${OBJG}
 fclean: clean
