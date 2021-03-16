@@ -6,63 +6,150 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 16:43:37 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/13 19:39:50 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/16 19:47:46 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilibx/mlx.h"
-#include "includes/cub3d.h"
-#include <stdio.h>
+#include "cub3d.h"
 
-void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void ft_print(t_posi position, t_data img, int color)
 {
-    char    *dst;
-
-    dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-    *(unsigned int*)dst = color;
+	ft_put_pixel_base(&img, position.X, position.Y, color);
 }
 
-void ft_putpixel(t_posi position, t_data img )
+void	ft_create_square(t_custom *varsi, int height, char color)
 {
-	my_mlx_pixel_put(&img, position.X, position.Y, 0x006E50);
+	int i;
+	int	j;
+	t_posi original_position; 
+
+	i = 0;
+	j = 0;
+	original_position = varsi->position;
+	while(i < height)
+	{
+		while(j < height)
+		{
+			ft_print(varsi->position, varsi->img, select_color(color));
+			varsi->position.X += 1;
+			j++;
+		}
+		j = 0;
+		varsi->position.X -= height;
+		varsi->position.Y += 1;
+		i++;
+	}
+	mlx_put_image_to_window(varsi->vars.mlx, varsi->vars.win, varsi->img.img, 0, 0);
+	varsi->position = original_position;
 }
 
-int				ft_action(int keycode)
+
+int             onRelease(int keycode, t_custom *varsi)
 {
-	printf("Ciao");
-	printf("Hello from key_hook %d!\n", keycode);
-	
-	// W = 13
-	// A = 0
-	// S = 1
-	// D = 2
-
-	
-	return (1);
-}
-
-int             key_hook(int keycode, t_vars *vars)
-{  
-	if (keycode == 53)
-		mlx_destroy_window(vars->mlx, vars->win);
-	else{
-		ft_action(keycode);
+	if (keycode == 13)
+	{
+		varsi->movement.up = 0;
+	}
+	else if(keycode == 1)
+	{
+		varsi->movement.down = 0;
+	}
+	else if(keycode == 0)
+	{
+		varsi->movement.left = 0;
+	}
+	else if(keycode == 2)
+	{
+		varsi->movement.right = 0;
 	}
 	return (1);
 }
 
+int             onPress(int keycode, t_custom *varsi)
+{  
+	if (keycode == 13)
+	{
+		varsi->movement.up = 1;
+	}
+	else if(keycode == 1)
+	{
+		varsi->movement.down = 1;
+	}
+	else if(keycode == 0)
+	{
+		varsi->movement.left = 1;
+	}
+	else if(keycode == 2)
+	{
+		varsi->movement.right = 1;
+	}else if (keycode == 53){
+		mlx_destroy_window(varsi->vars.mlx, varsi->vars.win);
+	}
+	printf("Code: %d! |  Position: X: %d. Y: %d\n", keycode, varsi->position.X, varsi->position.Y);
+	return (0);
+}
+
+int		render_next_frame(t_custom *varsi)
+{
+	if (varsi->position.X > 1910)
+		varsi->position.X = 11;
+	if (varsi->position.Y > 1000)
+		varsi->position.Y = 11;
+	if (varsi->position.X < 10)
+		varsi->position.X = 1910;
+	if (varsi->position.Y < 10)
+		varsi->position.Y = 1000;
+
+	if (varsi->movement.up)
+	{
+		varsi->position.Y -= 15;
+	}
+	if(varsi->movement.down)
+	{
+		varsi->position.Y += 15;
+	}
+	if(varsi->movement.left)
+	{
+		varsi->position.X -= 15;
+	}
+	if(varsi->movement.right)
+	{
+		varsi->position.X += 15;
+	}
+	ft_create_square(varsi, 50, 'b');
+	ft_re_create_img(varsi);
+	return (0);
+}
+
+void	ft_init(t_custom varsi)
+{
+	varsi.vars.mlx = mlx_init();
+    varsi.vars.win = mlx_new_window(varsi.vars.mlx, 1920, 1080, "Flavio Boomer!");
+	varsi.img.img = mlx_new_image(varsi.vars.mlx, 1920, 1080);
+	varsi.img.addr = mlx_get_data_addr(varsi.img.img, &varsi.img.bits_per_pixel, &varsi.img.line_length,
+                                 &varsi.img.endian);
+	mlx_put_image_to_window(varsi.vars.mlx, varsi.vars.win, varsi.img.img, 0, 0);
+	mlx_hook(varsi.vars.win,2, 1L<<0, onPress, &varsi);	
+	mlx_hook(varsi.vars.win,3, 1L<<0, onRelease, &varsi);	
+	mlx_loop_hook(varsi.vars.mlx, render_next_frame, &varsi);
+    mlx_loop(varsi.vars.mlx);
+}
+
+
 int main(void)
 {
+	t_custom		varsi;
 
-    t_vars		vars;
-	//t_posi		position;
-
-
-    vars.mlx = mlx_init();
-    vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
-	mlx_key_hook(vars.win, key_hook, &vars);	
-
-    mlx_loop(vars.mlx);
-}
+	varsi.position.X = 100;
+	varsi.position.Y = 100;
+	varsi.movement.up = 0;
+	varsi.movement.down = 0;
+	varsi.movement.right = 0;
+	varsi.movement.left = 0;
+	ft_init(varsi);
+	free(varsi.img.img);	
+	free(varsi.img.addr);
+	free(varsi.vars.win);
+}	
 
 
