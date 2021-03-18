@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 16:43:37 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/16 19:47:46 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/18 19:06:32 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,16 @@ int             onPress(int keycode, t_custom *varsi)
 	else if(keycode == 2)
 	{
 		varsi->movement.right = 1;
+	}
+	else if(keycode == 69)
+	{
+		varsi->movement.size++;
+		varsi->movement.speed++;
+	}
+	else if(keycode == 78)
+	{
+		varsi->movement.size--;
+		varsi->movement.speed--;
 	}else if (keycode == 53){
 		mlx_destroy_window(varsi->vars.mlx, varsi->vars.win);
 	}
@@ -102,21 +112,21 @@ int		render_next_frame(t_custom *varsi)
 
 	if (varsi->movement.up)
 	{
-		varsi->position.Y -= 15;
+		varsi->position.Y -= varsi->movement.speed;
 	}
 	if(varsi->movement.down)
 	{
-		varsi->position.Y += 15;
+		varsi->position.Y += varsi->movement.speed;
 	}
 	if(varsi->movement.left)
 	{
-		varsi->position.X -= 15;
+		varsi->position.X -= varsi->movement.speed;
 	}
 	if(varsi->movement.right)
 	{
-		varsi->position.X += 15;
+		varsi->position.X += varsi->movement.speed;
 	}
-	ft_create_square(varsi, 50, 'b');
+	ft_create_square(varsi, varsi->movement.size, 'g');
 	ft_re_create_img(varsi);
 	return (0);
 }
@@ -146,6 +156,8 @@ int main(void)
 	varsi.movement.down = 0;
 	varsi.movement.right = 0;
 	varsi.movement.left = 0;
+	varsi.movement.size = 50;
+	varsi.movement.speed = 50;
 	ft_init(varsi);
 	free(varsi.img.img);	
 	free(varsi.img.addr);

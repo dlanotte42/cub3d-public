@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 16:29:11 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/16 18:53:53 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/18 19:03:46 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct	s_player {
 	int			down;
 	int			right;
 	int			left;
+	int			size;
+	int			speed;
 }				t_player;
 
 typedef struct	s_custom{

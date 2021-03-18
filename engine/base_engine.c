@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 16:00:35 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/16 19:49:15 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/18 18:53:40 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void            ft_put_pixel_base(t_data *data, int x, int y, int color)
 
     dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
     *(unsigned int*)dst = color;
-	free(dst);
 }
 
 void			ft_re_create_img(t_custom *varsi)
