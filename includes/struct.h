@@ -5,13 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 16:29:11 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/18 19:03:46 by dlanotte         ###   ########.fr       */
+/*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
+/*   Updated: 2021/03/22 17:45:09 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+# define A_KEY 0
+# define S_KEY 1
+# define D_KEY 2
+# define W_KEY 13
+
+# define UP_KEY 126
+# define DOWN_KEY 125
+# define RIGHT_KEY 124
+# define LEFT_KEY 123
+
+# define TRUE 1
+# define FALSE 0
 
 typedef struct  s_data {
     void        *img;
@@ -26,25 +39,36 @@ typedef struct  s_vars {
     void        *win;
 }               t_vars;
 
-typedef struct	s_posi {
-	int			X;
-	int			Y;
-}				t_posi;
+typedef struct	s_movement {
+	int		up;
+	int		down;
+	int		left;
+	int		right;
+}				t_movement;
 
 typedef struct	s_player {
-	int			up;
-	int			down;
-	int			right;
-	int			left;
-	int			size;
-	int			speed;
+	t_movement	player_mov;
+	double		speed;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
 }				t_player;
 
-typedef struct	s_custom{
-	t_posi		position;
+typedef struct	s_camera {
+	int			ris_x;
+	int			ris_y;
+}				t_camera;
+
+typedef struct	s_game{
 	t_vars		vars;
 	t_data		img;
-	t_player	movement;
-}				t_custom;
+	t_movement	movement;
+	t_player	player;
+	t_camera	camera;
+	int			**map;
+}				t_game;
 
 #endif

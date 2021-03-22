@@ -1,14 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine-base.c                                      :+:      :+:    :+:   */
+/*   movement.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 15:26:17 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/16 16:25:14 by dlanotte         ###   ########.fr       */
+/*   Created: 2021/03/22 16:58:08 by dlanotte          #+#    #+#             */
+/*   Updated: 2021/03/22 16:58:46 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef MOVEMENT_H
+# define MOVEMENT_H
 
+# include "cub3d.h"
+
+void			ft_move(t_game *game);
+int				onPressButton(int keycode, t_game *game);
+int				onReleseButton(int keycode, t_game *game);
+
+#endif

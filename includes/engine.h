@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   engine.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 16:17:36 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/16 16:30:31 by dlanotte         ###   ########.fr       */
+/*   Created: 2021/03/22 16:56:09 by dlanotte          #+#    #+#             */
+/*   Updated: 2021/03/22 16:57:20 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef ENGINE_H
+# define ENGINE_H
 
-# include "mlx/mlx.h"
-# include <stdlib.h>
-# include <stdio.h>
-# include "engine/engine.h"
+# include "cub3d.h"
+
+void            ft_put_pixel_base(t_data *data, int x, int y, int color);
+void			ft_re_create_img(t_game *game);
+void			ft_print_wall(t_game *game);
 
 #endif

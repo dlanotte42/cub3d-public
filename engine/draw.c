@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   base_engine.c                                      :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 16:00:35 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/18 18:53:40 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/22 16:54:37 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
+#include "../includes/cub3d.h"
 
 void            ft_put_pixel_base(t_data *data, int x, int y, int color)
 {
@@ -20,21 +20,11 @@ void            ft_put_pixel_base(t_data *data, int x, int y, int color)
     *(unsigned int*)dst = color;
 }
 
-void			ft_re_create_img(t_custom *varsi)
+void			ft_re_create_img(t_game *game)
 {
-	mlx_destroy_image(varsi->vars.mlx, varsi->img.img);
-	varsi->img.img = mlx_new_image(varsi->vars.mlx, 1920, 1080);
-	varsi->img.addr = mlx_get_data_addr(varsi->img.img, 
-	&varsi->img.bits_per_pixel, &varsi->img.line_length, &varsi->img.endian);
-}
-
-int				select_color(char color)
-{
-	if (color == 'g')
-		return (5016882);
-	else if (color == 'r')
-		return (217469);
-	else if (color == 'b')
-		return (390252);
-	return (16711680);
+	mlx_destroy_image(game->vars.mlx, game->img.img);
+	game->img.img = mlx_new_image(game->vars.mlx, 
+		game->camera.ris_x, game->camera.ris_y);
+	game->img.addr = mlx_get_data_addr(game->img.img, 
+		&game->img.bits_per_pixel, &game->img.line_length, &game->img.endian);
 }

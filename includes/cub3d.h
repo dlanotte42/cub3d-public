@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine.h                                           :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 16:27:20 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/16 17:18:27 by dlanotte         ###   ########.fr       */
+/*   Created: 2021/03/16 16:17:36 by dlanotte          #+#    #+#             */
+/*   Updated: 2021/03/22 17:41:52 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENGINE_H
-# define ENGINE_H
-# include "../cub3d.h"
-# include "../struct/struct.h"
+#ifndef CUB3D_H
+# define CUB3D_H
 
-void            ft_put_pixel_base(t_data *data, int x, int y, int color);
-void			ft_re_create_img(t_custom *varsi);
-int				select_color(char color);
+# include <stdlib.h>
+# include <stdio.h>
+# include <math.h>
+# include <unistd.h>
+# include "../mlx/mlx.h"
+# include "struct.h"
+# include "engine.h"
+# include "movement.h"
 
 #endif
