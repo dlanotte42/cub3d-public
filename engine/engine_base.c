@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:43:47 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/22 17:57:46 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/22 18:49:46 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_print_wall(t_game *game)
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -63,6 +63,8 @@ void	ft_print_wall(t_game *game)
 	int			hit;
 	int 		side;
 
+	double 		oldDirX;
+	double 		oldPlaneX;
 	while(x < game->camera.ris_x)
 	{
 		y = 0;
@@ -149,7 +151,6 @@ void	ft_print_wall(t_game *game)
 			y++;
 		}
 		y = drawStart;
-		
 		while (y < drawEnd)
 		{
 			ft_put_pixel_base(&game->img, x, y, color);
@@ -161,6 +162,39 @@ void	ft_print_wall(t_game *game)
 			y++;
 		}
 
+		if (game->movement.up)
+		{
+			if(!(map[(int)(game->player.pos_x + game->player.dir_x * game->player.rotation_speed)][(int)game->player.pos_y]))
+			 	game->player.pos_x += game->player.dir_x * game->player.rotation_speed;
+			if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_x + game->player.dir_y * game->player.rotation_speed)]))
+				 game->player.pos_y += game->player.dir_y * game->player.rotation_speed;
+		}
+		if (game->movement.down)
+		{
+			if(!(map[(int)(game->player.pos_x - game->player.dir_x * game->player.rotation_speed)][(int)(game->player.pos_y)])) 
+				game->player.pos_x -= game->player.dir_x * game->player.rotation_speed;
+      		if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_y * game->player.rotation_speed)])) 
+			  	game->player.pos_y -= game->player.dir_y * game->player.rotation_speed;
+		}
+
+		if (game->movement.cam_right)
+		{
+			oldDirX = game->player.dir_x;
+			game->player.dir_x = game->player.dir_x * cos(-game->player.rotation_speed) - game->player.dir_y * sin(-game->player.rotation_speed);
+			game->player.dir_y = oldDirX * sin(-game->player.rotation_speed) + game->player.dir_y * cos(-game->player.rotation_speed);
+			oldPlaneX = game->player.plane_x;
+			game->player.plane_x = game->player.plane_x * cos(-game->player.rotation_speed) - game->player.plane_y * sin(-game->player.rotation_speed);
+			game->player.plane_y = oldPlaneX * sin(-game->player.rotation_speed) + game->player.plane_y * cos(-game->player.rotation_speed);
+		}
+		if (game->movement.cam_left)
+		{
+			oldDirX = game->player.dir_x;
+			game->player.dir_x = game->player.dir_x * cos(game->player.rotation_speed) - game->player.dir_y * sin(game->player.rotation_speed);
+			game->player.dir_y = oldDirX * sin(game->player.rotation_speed) + game->player.dir_y * cos(game->player.rotation_speed);
+			oldPlaneX = game->player.plane_x;
+			game->player.plane_x = game->player.plane_x * cos(game->player.rotation_speed) - game->player.plane_y * sin(game->player.rotation_speed);
+			game->player.plane_y = oldPlaneX * sin(game->player.rotation_speed) + game->player.plane_y * cos(game->player.rotation_speed);
+		}
 		x++;
 	}
 	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->img.img, 0, 0); 

@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/22 17:45:09 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/22 18:13:22 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,20 @@ typedef struct	s_movement {
 	int		down;
 	int		left;
 	int		right;
+	int		cam_right;
+	int		cam_left;
 }				t_movement;
 
 typedef struct	s_player {
 	t_movement	player_mov;
-	double		speed;
 	double		pos_x;
 	double		pos_y;
 	double		dir_x;
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
+	double		rotation_speed;
+	double		speed;
 }				t_player;
 
 typedef struct	s_camera {
