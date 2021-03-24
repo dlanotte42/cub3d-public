@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:43:47 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/24 16:00:33 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/24 20:32:50 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,23 @@ void	ft_print_wall(t_game *game)
 
 	int			hit;
 	int 		side;
+	int			textNum;
 
 	double 		oldDirX;
 	double 		oldPlaneX;
+
+	int a,b,c;
+
+	game->textures[1].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[1].texture_path, &game->textures[1].width, &game->textures[1].height);
+	game->textures[1].texture_addr = mlx_get_data_addr(game->textures[1].texture, &a, &b, &c);
+
+	game->textures[2].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[2].texture_path, &game->textures[2].width, &game->textures[2].height);
+	game->textures[2].texture_addr = mlx_get_data_addr(game->textures[2].texture, &a, &b, &c);
+
+	printf("ENDIAN: %d\n", game->textures[1].texture_endian);
+	printf("WIDTH: %d\n", game->textures[1].width);
+	printf("HEIGHT: %d\n", game->textures[1].height);
+
 	while(x < game->camera.ris_x)
 	{
 		y = 0;
@@ -131,7 +145,63 @@ void	ft_print_wall(t_game *game)
 		int drawEnd = lineHeight / 2 + game->camera.ris_y / 2;
 		if(drawEnd >= game->camera.ris_y)
 			drawEnd = game->camera.ris_y - 1;
+		
+		if (map[mapX][mapY] == 1)
+			textNum = 1;
+		else
+			textNum = 2;
+//		int texNum = map[mapX][mapY] - 1;
+		
+		double wallX; //where exactly the wall was hit
 
+		if(side == 0) 
+			wallX = game->player.pos_y + perpWallDist * rayDirY; //wallX = game->player.pos_x + perpWallDist * rayDirY;   //Brutto effetto
+		else          					
+			wallX = game->player.pos_x + perpWallDist * rayDirX; //wallX = game->player.pos_y + perpWallDist * rayDirY;
+			
+		wallX -= floor((wallX));
+
+
+		int texX = (int)(wallX * (double)(game->textures[textNum].width));
+		if(side == 0 && rayDirX > 0) 
+			texX = game->textures[textNum].width - texX - 1;
+		if(side == 1 && rayDirY < 0) 
+			texX = game->textures[textNum].width - texX - 1;
+
+
+		double step = 1.0 * game->textures[1].height / lineHeight;
+      	double texPos = (drawStart - game->camera.ris_y / 2 + lineHeight / 2) * step;
+
+		while(y < drawStart)
+		{
+			ft_put_pixel_base(&game->img, x, y, 0x6D98FF);
+		//	game->img.addr[x * 4 + y * game->camera.ris_x * 4 + 3] = (char)200; //Drunk Mod
+
+			y++;
+		}
+
+		y = drawStart;
+
+		while( y < drawEnd)
+		{
+			int texY = (int)texPos & (game->textures[textNum].width - 1);
+			texPos += step;
+
+			game->img.addr[(x) * 4 + (4 * game->camera.ris_x * (y))] = (int)(game->textures[textNum].texture_addr[texX * 4 + 4 * game->textures[textNum].width * texY ]);
+            game->img.addr[(x) * 4 + (4 * game->camera.ris_x * (y)) + 1] = (int)(game->textures[textNum].texture_addr[texX * 4 + 4 * game->textures[textNum].width * texY + 1]);
+            game->img.addr[(x) * 4 + (4 * game->camera.ris_x * (y)) + 2] = (int)(game->textures[textNum].texture_addr[texX * 4 + 4 * game->textures[textNum].width * texY + 2]);
+		
+			y++;
+		}
+
+		while(y < game->camera.ris_y)
+		{
+			ft_put_pixel_base(&game->img, x, y, 0xFFFFFF);
+		//	game->img.addr[x * 4 + y * game->camera.ris_x * 4 + 3] = (char)200; //Drunk Mod
+			y++;
+		}
+
+		/*
 		int color;
 		switch(map[mapX][mapY])
 		{
@@ -145,22 +215,12 @@ void	ft_print_wall(t_game *game)
 		if(side == 1)
 			color = color / 2;
 
-		while(y < drawStart)
-		{
-			ft_put_pixel_base(&game->img, x, y, 0x6D98FF);
-			y++;
-		}
-		y = drawStart;
-		while (y < drawEnd)
-		{
-			ft_put_pixel_base(&game->img, x, y, color);
-			y++;
-		}
-		while(y < game->camera.ris_y)
-		{
-			ft_put_pixel_base(&game->img, x, y, 0xFFFF00);
-			y++;
-		}
+		
+
+		
+
+			*/
+
 
 		if (game->movement.right)
 		{

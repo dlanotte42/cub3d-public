@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/22 18:13:22 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/24 20:11:15 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,22 @@ typedef struct	s_camera {
 	int			ris_y;
 }				t_camera;
 
+typedef struct 	s_textures {
+	void		*texture;
+	int			height;
+	int			width;
+	int			texture_endian;
+	char		*texture_path;
+	char		*texture_addr;
+}				t_textures;
+
 typedef struct	s_game{
 	t_vars		vars;
 	t_data		img;
 	t_movement	movement;
 	t_player	player;
 	t_camera	camera;
+	t_textures	*textures;
 	int			**map;
 }				t_game;
 
