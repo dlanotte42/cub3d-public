@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:43:47 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/22 18:49:46 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/24 16:00:33 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,19 +162,35 @@ void	ft_print_wall(t_game *game)
 			y++;
 		}
 
+		if (game->movement.right)
+		{
+			if(!(map[(int)(game->player.pos_x + game->player.dir_y * game->player.speed)][(int)(game->player.pos_y)]))
+				game->player.pos_x += game->player.dir_y * game->player.speed;
+			if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_x * game->player.speed)]))
+				game->player.pos_y -= game->player.dir_x * game->player.speed;
+		}
+
+		if (game->movement.left)
+		{
+			if(!(map[(int)(game->player.pos_x - game->player.dir_y * game->player.speed)][(int)(game->player.pos_y)]))
+				game->player.pos_x -= game->player.dir_y * game->player.speed;
+			if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y + game->player.dir_x * game->player.speed)]))
+				game->player.pos_y += game->player.dir_x * game->player.speed;
+		}
+
 		if (game->movement.up)
 		{
-			if(!(map[(int)(game->player.pos_x + game->player.dir_x * game->player.rotation_speed)][(int)game->player.pos_y]))
-			 	game->player.pos_x += game->player.dir_x * game->player.rotation_speed;
-			if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_x + game->player.dir_y * game->player.rotation_speed)]))
-				 game->player.pos_y += game->player.dir_y * game->player.rotation_speed;
+			if(!(map[(int)(game->player.pos_x + game->player.dir_x * game->player.speed)][(int)game->player.pos_y]))
+			 	game->player.pos_x += game->player.dir_x * game->player.speed;
+			if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_x + game->player.dir_y * game->player.speed)]))
+				 game->player.pos_y += game->player.dir_y * game->player.speed;
 		}
 		if (game->movement.down)
 		{
-			if(!(map[(int)(game->player.pos_x - game->player.dir_x * game->player.rotation_speed)][(int)(game->player.pos_y)])) 
-				game->player.pos_x -= game->player.dir_x * game->player.rotation_speed;
-      		if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_y * game->player.rotation_speed)])) 
-			  	game->player.pos_y -= game->player.dir_y * game->player.rotation_speed;
+			if(!(map[(int)(game->player.pos_x - game->player.dir_x * game->player.speed)][(int)(game->player.pos_y)])) 
+				game->player.pos_x -= game->player.dir_x * game->player.speed;
+      		if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_y * game->player.speed)])) 
+			  	game->player.pos_y -= game->player.dir_y * game->player.speed;
 		}
 
 		if (game->movement.cam_right)

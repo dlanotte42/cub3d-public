@@ -6,23 +6,11 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:02:28 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/22 18:48:50 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/24 16:00:40 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-/*void	ft_move(t_game *game)
-{
-	if (game->movement.right == 1)
-		game->player.pos_y += game->player.speed;
-	if (game->movement.left == 1)
-		game->player.pos_y -= game->player.speed;
-	if (game->movement.up == 1)
-		game->player.pos_x -= game->player.dir_x * game->player.rotation_speed;
-	if (game->movement.down == 1)
-		game->player.pos_x += game->player.speed;
-}*/
 
 int		onPressButton(int keycode, t_game *game)
 {
