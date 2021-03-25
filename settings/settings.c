@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:02 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/03/25 00:56:09 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/03/25 01:26:00 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_set_parameters(t_game *game)
 	game->textures[0].texture_path = "./texture/bluestone.xpm";
 	game->textures[1].texture_path = "./texture/greystone.xpm";
 	game->textures[2].texture_path = "./texture/colorstone.xpm";
-	game->textures[3].texture_path = "./texture/eagle.xpm";
+	game->textures[3].texture_path = "./texture/Dkstnrgt.xpm";
 	game->textures[4].texture_path = "./texture/mossy.xpm";
 	game->textures[5].texture_path = "./texture/redbrick.xpm";
 	game->textures[6].texture_path = "./texture/wood.xpm";
