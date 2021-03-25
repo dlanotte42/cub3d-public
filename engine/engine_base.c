@@ -3,28 +3,105 @@
 /*                                                        :::      ::::::::   */
 /*   engine_base.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:43:47 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/24 20:32:50 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/25 00:57:41 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	ft_print_wall(t_game *game)
+static void		ft_init_texture(t_game *game)
+{
+	int a,b,c,d,e,f;
+
+	game->textures[0].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[0].texture_path, 
+		&game->textures[0].width, &game->textures[0].height);
+	game->textures[0].texture_addr = mlx_get_data_addr(game->textures[0].texture, &d, &e, &f);
+	game->textures[1].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[1].texture_path, 
+		&game->textures[1].width, &game->textures[1].height);
+	game->textures[1].texture_addr = mlx_get_data_addr(game->textures[1].texture, &a, &b, &c);
+	game->textures[2].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[2].texture_path, 
+		&game->textures[2].width, &game->textures[2].height);
+	game->textures[2].texture_addr = mlx_get_data_addr(game->textures[2].texture, &d, &e, &f);
+	game->textures[3].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[3].texture_path, 
+		&game->textures[3].width, &game->textures[3].height);
+	game->textures[3].texture_addr = mlx_get_data_addr(game->textures[3].texture, &d, &e, &f);
+	game->textures[4].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[4].texture_path, 
+		&game->textures[4].width, &game->textures[4].height);
+	game->textures[4].texture_addr = mlx_get_data_addr(game->textures[4].texture, &d, &e, &f);
+	game->textures[5].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[5].texture_path, 
+		&game->textures[5].width, &game->textures[5].height);
+	game->textures[5].texture_addr = mlx_get_data_addr(game->textures[5].texture, &d, &e, &f);
+	game->textures[6].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[6].texture_path, 
+		&game->textures[6].width, &game->textures[6].height);
+	game->textures[6].texture_addr = mlx_get_data_addr(game->textures[6].texture, &d, &e, &f);
+	game->textures[7].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[7].texture_path, 
+		&game->textures[7].width, &game->textures[7].height);
+	game->textures[7].texture_addr = mlx_get_data_addr(game->textures[7].texture, &d, &e, &f);
+	game->textures[8].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[8].texture_path, 
+		&game->textures[8].width, &game->textures[8].height);
+	game->textures[8].texture_addr = mlx_get_data_addr(game->textures[8].texture, &d, &e, &f);
+	game->textures[9].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[9].texture_path, 
+		&game->textures[9].width, &game->textures[9].height);
+	game->textures[9].texture_addr = mlx_get_data_addr(game->textures[9].texture, &d, &e, &f);
+	game->textures[10].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[10].texture_path, 
+		&game->textures[10].width, &game->textures[10].height);
+	game->textures[10].texture_addr = mlx_get_data_addr(game->textures[10].texture, &d, &e, &f);
+}
+
+static	void	ft_print_w_a_t(t_game *game, int drawStart, int drawEnd, int lineHeight, int texX)
+{
+	int texY; 
+	double step;
+	double texPos;
+
+	step = 1.0 * game->textures[1].height / lineHeight;
+    texPos = (drawStart - game->camera.ris_y / 2 + lineHeight / 2) * step;
+
+	while(game->raycasting.y < drawStart)
+	{
+		ft_put_pixel_base(&game->img, game->raycasting.x, game->raycasting.y, 0x888c8d);
+		if (game->mods.Drunk)
+			game->img.addr[game->raycasting.x * 4 + game->raycasting.y * game->camera.ris_x * 4 + 3] = (char)200; 
+		game->raycasting.y++;
+	}
+	game->raycasting.y = drawStart;
+	while(game->raycasting.y < drawEnd)
+	{
+		texY = (int)texPos & (game->textures[game->raycasting.textNum].height - 1);
+		texPos += step;
+		
+		game->img.addr[(game->raycasting.x) * 4 + (4 * game->camera.ris_x * (game->raycasting.y))] = (int)(game->textures[game->raycasting.textNum].texture_addr[texX * 4 + 4 * game->textures[game->raycasting.textNum].width * texY ]);
+		game->img.addr[(game->raycasting.x) * 4 + (4 * game->camera.ris_x * (game->raycasting.y)) + 1] = (int)(game->textures[game->raycasting.textNum].texture_addr[texX * 4 + 4 * game->textures[game->raycasting.textNum].width * texY + 1]);
+		game->img.addr[(game->raycasting.x) * 4 + (4 * game->camera.ris_x * (game->raycasting.y)) + 2] = (int)(game->textures[game->raycasting.textNum].texture_addr[texX * 4 + 4 * game->textures[game->raycasting.textNum].width * texY + 2]);				
+		if (game->mods.Drunk)
+			game->img.addr[(game->raycasting.x) * 4 + (4 * game->camera.ris_x * (game->raycasting.y)) + 3] = (char) 200;
+		game->raycasting.y++;
+	}
+	while(game->raycasting.y < game->camera.ris_y)
+	{
+		ft_put_pixel_base(&game->img, game->raycasting.x, game->raycasting.y, 0xcaa472);
+		if (game->mods.Drunk)
+			game->img.addr[game->raycasting.x * 4 + game->raycasting.y * game->camera.ris_x * 4 + 3] = (char)200; 
+		game->raycasting.y++;
+	}
+}
+
+void	ft_raycasting(t_game *game)
 {
 	int map[24][24]=
 	{
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+		{1,1,1,1,1,1,2,3,4,5,6,7,8,1,1,1,1,1,1,1,1,1,1,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+		{1,0,0,0,0,0,8,8,8,8,8,0,0,0,0,3,0,3,0,3,0,0,0,1},
+		{1,0,0,0,0,0,2,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,2,0,0,0,8,0,0,0,0,3,0,0,0,3,0,0,0,1},
+		{1,0,0,0,0,0,2,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,2,10,0,10,8,0,0,0,0,3,0,3,0,3,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -36,242 +113,44 @@ void	ft_print_wall(t_game *game)
 		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,4,0,4,4,4,4,4,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,4,4,4,4,4,4,4,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
-	int 		y;
-	int 		x = 0;
-	double		cameraX;
-	double		rayDirX;
-	double		rayDirY;
+	game->raycasting.x = 0;
 
-	int 		mapX;
-    int 		mapY;
-
-	double 		sideDistX;
-    double 		sideDistY;
-
-	double 		deltaDistX;
-    double 		deltaDistY;
-    double 		perpWallDist;
-
-	int 		stepX;
-	int 		stepY;
-
-	int			hit;
-	int 		side;
-	int			textNum;
-
-	double 		oldDirX;
-	double 		oldPlaneX;
-
-	int a,b,c;
-
-	game->textures[1].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[1].texture_path, &game->textures[1].width, &game->textures[1].height);
-	game->textures[1].texture_addr = mlx_get_data_addr(game->textures[1].texture, &a, &b, &c);
-
-	game->textures[2].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[2].texture_path, &game->textures[2].width, &game->textures[2].height);
-	game->textures[2].texture_addr = mlx_get_data_addr(game->textures[2].texture, &a, &b, &c);
-
-	printf("ENDIAN: %d\n", game->textures[1].texture_endian);
-	printf("WIDTH: %d\n", game->textures[1].width);
-	printf("HEIGHT: %d\n", game->textures[1].height);
-
-	while(x < game->camera.ris_x)
+	ft_init_texture(game);
+	while(game->raycasting.x < game->camera.ris_x)
 	{
-		y = 0;
-		cameraX = 2 * x / (double)game->camera.ris_x - 1;	
-		rayDirX = game->player.dir_x + game->player.plane_x * cameraX; 
-		rayDirY = game->player.dir_y + game->player.plane_y * cameraX;
+		double wallX;
+		int texX; 
 
-		mapX = (int)game->player.pos_x;
-		mapY = (int)game->player.pos_y;
-
-		deltaDistX = fabs(1 / rayDirX);
-		deltaDistY = fabs(1 / rayDirY);
-		hit = 0;
-
-		if(rayDirX < 0)
+		game = ft_raycast_zero(game, map);
+		if (game->mods.Wall_rotate)
 		{
-			stepX = -1;
-			sideDistX = (game->player.pos_x - mapX) * deltaDistX;
+			if(game->raycasting.side == 0) 
+				wallX = game->player.pos_x + game->raycasting.perpWallDist * game->raycasting.rayDirY; 
+			else          					
+				wallX = game->player.pos_y + game->raycasting.perpWallDist * game->raycasting.rayDirX; 
 		}
 		else
 		{
-			stepX = 1;
-			sideDistX = (mapX + 1.0 - game->player.pos_x) * deltaDistX;
+			if(game->raycasting.side == 0) 
+				wallX = game->player.pos_y + game->raycasting.perpWallDist * game->raycasting.rayDirY;
+			else          					
+				wallX = game->player.pos_x + game->raycasting.perpWallDist * game->raycasting.rayDirX;
 		}
-		
-		if(rayDirY < 0)
-		{
-			stepY = -1;
-			sideDistY = (game->player.pos_y - mapY) * deltaDistY;
-		}
-		else
-		{
-			stepY = 1;
-			sideDistY = (mapY + 1.0 - game->player.pos_y) * deltaDistY;
-		}
-
-		while (hit == 0)
-		{
-			if(sideDistX < sideDistY)
-			{
-				sideDistX += deltaDistX;
-				mapX += stepX;
-				side = 0;
-			}
-			else
-			{
-				sideDistY += deltaDistY;
-				mapY += stepY;
-				side = 1;
-			}
-			if(map[mapX][mapY] > 0) 
-				hit = 1;
-		}
-
-		if(side == 0) 
-			perpWallDist = (mapX - game->player.pos_x + (1 - stepX) / 2) / rayDirX;
-		else          
-			perpWallDist = (mapY - game->player.pos_y + (1 - stepY) / 2) / rayDirY;
-		int lineHeight = (int)(game->camera.ris_y / perpWallDist);
-
-		int drawStart = -lineHeight / 2 + game->camera.ris_y / 2;
-		if(drawStart < 0)
-			drawStart = 0;
-		int drawEnd = lineHeight / 2 + game->camera.ris_y / 2;
-		if(drawEnd >= game->camera.ris_y)
-			drawEnd = game->camera.ris_y - 1;
-		
-		if (map[mapX][mapY] == 1)
-			textNum = 1;
-		else
-			textNum = 2;
-//		int texNum = map[mapX][mapY] - 1;
-		
-		double wallX; //where exactly the wall was hit
-
-		if(side == 0) 
-			wallX = game->player.pos_y + perpWallDist * rayDirY; //wallX = game->player.pos_x + perpWallDist * rayDirY;   //Brutto effetto
-		else          					
-			wallX = game->player.pos_x + perpWallDist * rayDirX; //wallX = game->player.pos_y + perpWallDist * rayDirY;
-			
 		wallX -= floor((wallX));
-
-
-		int texX = (int)(wallX * (double)(game->textures[textNum].width));
-		if(side == 0 && rayDirX > 0) 
-			texX = game->textures[textNum].width - texX - 1;
-		if(side == 1 && rayDirY < 0) 
-			texX = game->textures[textNum].width - texX - 1;
-
-
-		double step = 1.0 * game->textures[1].height / lineHeight;
-      	double texPos = (drawStart - game->camera.ris_y / 2 + lineHeight / 2) * step;
-
-		while(y < drawStart)
-		{
-			ft_put_pixel_base(&game->img, x, y, 0x6D98FF);
-		//	game->img.addr[x * 4 + y * game->camera.ris_x * 4 + 3] = (char)200; //Drunk Mod
-
-			y++;
-		}
-
-		y = drawStart;
-
-		while( y < drawEnd)
-		{
-			int texY = (int)texPos & (game->textures[textNum].width - 1);
-			texPos += step;
-
-			game->img.addr[(x) * 4 + (4 * game->camera.ris_x * (y))] = (int)(game->textures[textNum].texture_addr[texX * 4 + 4 * game->textures[textNum].width * texY ]);
-            game->img.addr[(x) * 4 + (4 * game->camera.ris_x * (y)) + 1] = (int)(game->textures[textNum].texture_addr[texX * 4 + 4 * game->textures[textNum].width * texY + 1]);
-            game->img.addr[(x) * 4 + (4 * game->camera.ris_x * (y)) + 2] = (int)(game->textures[textNum].texture_addr[texX * 4 + 4 * game->textures[textNum].width * texY + 2]);
-		
-			y++;
-		}
-
-		while(y < game->camera.ris_y)
-		{
-			ft_put_pixel_base(&game->img, x, y, 0xFFFFFF);
-		//	game->img.addr[x * 4 + y * game->camera.ris_x * 4 + 3] = (char)200; //Drunk Mod
-			y++;
-		}
-
-		/*
-		int color;
-		switch(map[mapX][mapY])
-		{
-			case 1:  color = 0xFF9021;   break; //orange
-			case 2:  color = 0x00ff00;  break; //green
-			case 3:  color = 0x0000ff;   break; //blue
-			case 4:  color = 0xffffff;  break; //white
-			default: color = 0x000000; break; //yellow
-		}
-
-		if(side == 1)
-			color = color / 2;
-
-		
-
-		
-
-			*/
-
-
-		if (game->movement.right)
-		{
-			if(!(map[(int)(game->player.pos_x + game->player.dir_y * game->player.speed)][(int)(game->player.pos_y)]))
-				game->player.pos_x += game->player.dir_y * game->player.speed;
-			if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_x * game->player.speed)]))
-				game->player.pos_y -= game->player.dir_x * game->player.speed;
-		}
-
-		if (game->movement.left)
-		{
-			if(!(map[(int)(game->player.pos_x - game->player.dir_y * game->player.speed)][(int)(game->player.pos_y)]))
-				game->player.pos_x -= game->player.dir_y * game->player.speed;
-			if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y + game->player.dir_x * game->player.speed)]))
-				game->player.pos_y += game->player.dir_x * game->player.speed;
-		}
-
-		if (game->movement.up)
-		{
-			if(!(map[(int)(game->player.pos_x + game->player.dir_x * game->player.speed)][(int)game->player.pos_y]))
-			 	game->player.pos_x += game->player.dir_x * game->player.speed;
-			if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_x + game->player.dir_y * game->player.speed)]))
-				 game->player.pos_y += game->player.dir_y * game->player.speed;
-		}
-		if (game->movement.down)
-		{
-			if(!(map[(int)(game->player.pos_x - game->player.dir_x * game->player.speed)][(int)(game->player.pos_y)])) 
-				game->player.pos_x -= game->player.dir_x * game->player.speed;
-      		if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_y * game->player.speed)])) 
-			  	game->player.pos_y -= game->player.dir_y * game->player.speed;
-		}
-
-		if (game->movement.cam_right)
-		{
-			oldDirX = game->player.dir_x;
-			game->player.dir_x = game->player.dir_x * cos(-game->player.rotation_speed) - game->player.dir_y * sin(-game->player.rotation_speed);
-			game->player.dir_y = oldDirX * sin(-game->player.rotation_speed) + game->player.dir_y * cos(-game->player.rotation_speed);
-			oldPlaneX = game->player.plane_x;
-			game->player.plane_x = game->player.plane_x * cos(-game->player.rotation_speed) - game->player.plane_y * sin(-game->player.rotation_speed);
-			game->player.plane_y = oldPlaneX * sin(-game->player.rotation_speed) + game->player.plane_y * cos(-game->player.rotation_speed);
-		}
-		if (game->movement.cam_left)
-		{
-			oldDirX = game->player.dir_x;
-			game->player.dir_x = game->player.dir_x * cos(game->player.rotation_speed) - game->player.dir_y * sin(game->player.rotation_speed);
-			game->player.dir_y = oldDirX * sin(game->player.rotation_speed) + game->player.dir_y * cos(game->player.rotation_speed);
-			oldPlaneX = game->player.plane_x;
-			game->player.plane_x = game->player.plane_x * cos(game->player.rotation_speed) - game->player.plane_y * sin(game->player.rotation_speed);
-			game->player.plane_y = oldPlaneX * sin(game->player.rotation_speed) + game->player.plane_y * cos(game->player.rotation_speed);
-		}
-		x++;
+		texX = (int)(wallX * (double)(game->textures[game->raycasting.textNum].width));
+		if(game->raycasting.side == 0 && game->raycasting.rayDirX > 0) 
+			texX = game->textures[game->raycasting.textNum].width - texX - 1;
+		if(game->raycasting.side == 1 && game->raycasting.rayDirY < 0) 
+			texX = game->textures[game->raycasting.textNum].width - texX - 1;
+		ft_print_w_a_t(game, game->raycasting.Addvalues.drawStart, 
+			game->raycasting.Addvalues.drawEnd, game->raycasting.Addvalues.lineheight, texX);
+		ft_move(game, map);
+		game->raycasting.x++;
 	}
 	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->img.img, 0, 0); 
 }

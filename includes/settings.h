@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine.h                                           :+:      :+:    :+:   */
+/*   settings.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/22 16:56:09 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/25 00:27:24 by zxcvbinz         ###   ########.fr       */
+/*   Created: 2021/03/24 23:43:58 by zxcvbinz          #+#    #+#             */
+/*   Updated: 2021/03/25 00:29:07 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENGINE_H
-# define ENGINE_H
+#ifndef SETTINGS_H
+# define SETTINGS_H
 
 # include "cub3d.h"
 
-void            ft_put_pixel_base(t_data *data, int x, int y, int color);
-void			ft_re_create_img(t_game *game);
-void			ft_raycasting(t_game *game);
-t_game			*ft_raycast_zero(t_game *game, int map[24][24]);
+void		ft_set_parameters(t_game *game);
+t_game		*ft_raycast_set_block(t_game *game, int map[24][24]);
 
 #endif

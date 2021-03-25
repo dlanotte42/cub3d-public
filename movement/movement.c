@@ -3,16 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:02:28 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/24 16:23:32 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/25 00:07:29 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int		onPressButton(int keycode, t_game *game)
+static void	ft_mods(int keycode, t_game *game)
+{
+	if (keycode == DRUNK_KEY && !game->mods.Drunk)
+		game->mods.Drunk = TRUE;
+	else if (keycode == DRUNK_KEY && game->mods.Drunk)
+		game->mods.Drunk = FALSE;
+}
+
+void		ft_move(t_game *game, int map[24][24])
+{
+		if (game->movement.right)
+		{
+			if(!(map[(int)(game->player.pos_x + game->player.dir_y * game->player.speed)][(int)(game->player.pos_y)]))
+				game->player.pos_x += game->player.dir_y * game->player.speed;
+			if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_x * game->player.speed)]))
+				game->player.pos_y -= game->player.dir_x * game->player.speed;
+		}
+
+		if (game->movement.left)
+		{
+			if(!(map[(int)(game->player.pos_x - game->player.dir_y * game->player.speed)][(int)(game->player.pos_y)]))
+				game->player.pos_x -= game->player.dir_y * game->player.speed;
+			if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y + game->player.dir_x * game->player.speed)]))
+				game->player.pos_y += game->player.dir_x * game->player.speed;
+		}
+
+		if (game->movement.up)
+		{
+			if(!(map[(int)(game->player.pos_x + game->player.dir_x * game->player.speed)][(int)game->player.pos_y]))
+			 	game->player.pos_x += game->player.dir_x * game->player.speed;
+			if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_x + game->player.dir_y * game->player.speed)]))
+				 game->player.pos_y += game->player.dir_y * game->player.speed;
+		}
+		if (game->movement.down)
+		{
+			if(!(map[(int)(game->player.pos_x - game->player.dir_x * game->player.speed)][(int)(game->player.pos_y)])) 
+				game->player.pos_x -= game->player.dir_x * game->player.speed;
+      		if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_y * game->player.speed)])) 
+			  	game->player.pos_y -= game->player.dir_y * game->player.speed;
+		}
+
+		if (game->movement.cam_right)
+		{
+			game->raycasting.oldDirX = game->player.dir_x;
+			game->player.dir_x = game->player.dir_x * cos(-game->player.rotation_speed) - game->player.dir_y * sin(-game->player.rotation_speed);
+			game->player.dir_y = game->raycasting.oldDirX * sin(-game->player.rotation_speed) + game->player.dir_y * cos(-game->player.rotation_speed);
+			game->raycasting.oldPlaneX = game->player.plane_x;
+			game->player.plane_x = game->player.plane_x * cos(-game->player.rotation_speed) - game->player.plane_y * sin(-game->player.rotation_speed);
+			game->player.plane_y = game->raycasting.oldPlaneX * sin(-game->player.rotation_speed) + game->player.plane_y * cos(-game->player.rotation_speed);
+		}
+		if (game->movement.cam_left)
+		{
+			game->raycasting.oldDirX = game->player.dir_x;
+			game->player.dir_x = game->player.dir_x * cos(game->player.rotation_speed) - game->player.dir_y * sin(game->player.rotation_speed);
+			game->player.dir_y = game->raycasting.oldDirX * sin(game->player.rotation_speed) + game->player.dir_y * cos(game->player.rotation_speed);
+			game->raycasting.oldPlaneX = game->player.plane_x;
+			game->player.plane_x = game->player.plane_x * cos(game->player.rotation_speed) - game->player.plane_y * sin(game->player.rotation_speed);
+			game->player.plane_y = game->raycasting.oldPlaneX * sin(game->player.rotation_speed) + game->player.plane_y * cos(game->player.rotation_speed);
+		}
+}
+
+int			onPressButton(int keycode, t_game *game)
 {
 	//printf("Hello from keycode: %d key_hook!\n", keycode);
 	if (keycode == 53)
@@ -29,10 +90,12 @@ int		onPressButton(int keycode, t_game *game)
 		game->movement.cam_right = TRUE;
 	if (keycode == LEFT_KEY)
 		game->movement.cam_left = TRUE;
+	if (keycode == DRUNK_KEY)
+		ft_mods(keycode, game);
 	return (0);
 }
 
-int		onReleseButton(int keycode, t_game *game)
+int			onReleseButton(int keycode, t_game *game)
 {
 	if (keycode == 53)
 		mlx_destroy_window(game->vars.mlx, game->vars.win);
