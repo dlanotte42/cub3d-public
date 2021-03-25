@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/25 01:45:48 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/03/25 20:23:16 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ typedef struct 	s_textures {
 	int				texture_endian;
 	char			*texture_path;
 	char			*texture_addr;
+	int         	bits_per_pixel;
+    int         	line_length;
+    int         	endian;
 }				t_textures;
 
 typedef	struct	s_ray_value {

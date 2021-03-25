@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   engine_raycast.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 00:12:59 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/03/25 00:33:42 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/03/25 20:44:46 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static t_game	*ft_raycast_two(t_game *game, int map[24][24], int lineHeight)
+static t_game	*ft_raycast_two(t_game *game, int lineHeight)
 {
 	game->raycasting.Addvalues.drawStart = -lineHeight / 2 + game->camera.ris_y / 2;
 	if(game->raycasting.Addvalues.drawStart < 0)
@@ -20,40 +20,38 @@ static t_game	*ft_raycast_two(t_game *game, int map[24][24], int lineHeight)
 	game->raycasting.Addvalues.drawEnd = lineHeight / 2 + game->camera.ris_y / 2;
 	if(game->raycasting.Addvalues.drawEnd >= game->camera.ris_y)
 		game->raycasting.Addvalues.drawEnd = game->camera.ris_y - 1;
-	game = ft_raycast_set_block(game, map);
+	game = ft_raycast_set_block(game);
 	return (game);
 }
 
 static t_game	*ft_raycast_one(t_game *game, int map[24][24])
 {
 
-	while (game->raycasting.hit == 0)
-	{
-		if(game->raycasting.sideDistX < game->raycasting.sideDistY)
-		{
+      while (game->raycasting.hit == 0)
+      {
+        if(game->raycasting.sideDistX < game->raycasting.sideDistY)
+        {
 			game->raycasting.sideDistX += game->raycasting.deltaDistX;
 			game->raycasting.mapX += game->raycasting.stepX;
 			game->raycasting.side = 0;
-		}
-		else
-		{
+        }
+        else
+        {
 			game->raycasting.sideDistY += game->raycasting.deltaDistY;
 			game->raycasting.mapY += game->raycasting.stepY;
 			game->raycasting.side = 1;
-		}
-		if(map[game->raycasting.mapX][game->raycasting.mapY] > 0) 
+        }
+        if(map[game->raycasting.mapX][game->raycasting.mapY] > 0) 
 			game->raycasting.hit = 1;
-	}
-	if(game->raycasting.side == 0) 
-		game->raycasting.perpWallDist = (game->raycasting.mapX - 
-		game->player.pos_x + (1 - game->raycasting.stepX) / 2)
-		 / game->raycasting.rayDirX;
-	else          
-		game->raycasting.perpWallDist = (game->raycasting.mapY- 
-		game->player.pos_y + (1 - game->raycasting.stepY) / 2
-		 ) / game->raycasting.rayDirY;
-	 game->raycasting.Addvalues.lineheight = (int)(game->camera.ris_y / game->raycasting.perpWallDist);
-	game = ft_raycast_two(game, map, game->raycasting.Addvalues.lineheight);
+      }
+      if(game->raycasting.side == 0) 
+        game->raycasting.perpWallDist = (game->raycasting.mapX - game->player.pos_x + (1 - game->raycasting.stepX) / 2) / game->raycasting.rayDirX;
+      else          
+        game->raycasting.perpWallDist = (game->raycasting.mapY - game->player.pos_y + (1 - game->raycasting.stepY) / 2) / game->raycasting.rayDirY;
+		 
+	game->raycasting.Addvalues.lineheight = (int)(game->camera.ris_y / game->raycasting.perpWallDist);
+	
+	game = ft_raycast_two(game, game->raycasting.Addvalues.lineheight);
 	return (game);
 }
 

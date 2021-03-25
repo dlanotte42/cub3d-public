@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine_base.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:43:47 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/25 01:53:16 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/03/25 20:42:27 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void		ft_init_texture(t_game *game)
 {
-	int a,b,c;
 	int i;
 
 	i = 0;
@@ -22,20 +21,23 @@ static void		ft_init_texture(t_game *game)
 	{
 		game->textures[i].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[i].texture_path, 
 			&game->textures[i].width, &game->textures[i].height);
-		game->textures[i].texture_addr = mlx_get_data_addr(game->textures[i].texture, &a, &b, &c);
+		game->textures[i].texture_addr = mlx_get_data_addr(game->textures[i].texture, &game->textures[i].bits_per_pixel, &game->textures[i].line_length, &game->textures[i].endian);
 		i++;
 	}
 }
 
 static	void	ft_print_w_a_t(t_game *game, int drawStart, int drawEnd, int lineHeight, int texX)
 {
-	int texY; 
-	double step;
-	double texPos;
+	int 			texY; 
+	double 			step;
+	double 			texPos;
+	unsigned int 	color;
 
-	step = 1.0 * game->textures[1].height / lineHeight;
+
+	step = 1.0 * game->textures[game->raycasting.textNum].height / lineHeight;
     texPos = (drawStart - game->camera.ris_y / 2 + lineHeight / 2) * step;
 
+	game->raycasting.y = 0;
 	while(game->raycasting.y < drawStart)
 	{
 		ft_put_pixel_base(&game->img, game->raycasting.x, game->raycasting.y, 0x888c8d);
@@ -43,65 +45,57 @@ static	void	ft_print_w_a_t(t_game *game, int drawStart, int drawEnd, int lineHei
 			game->img.addr[game->raycasting.x * 4 + game->raycasting.y * game->camera.ris_x * 4 + 3] = (char)200; 
 		game->raycasting.y++;
 	}
-	game->raycasting.y = drawStart;
 	while(game->raycasting.y < drawEnd)
 	{
 		texY = (int)texPos & (game->textures[game->raycasting.textNum].height - 1);
 		texPos += step;
-		
-		game->img.addr[(game->raycasting.x) * 4 + (4 * game->camera.ris_x * (game->raycasting.y))] = (int)(game->textures[game->raycasting.textNum].texture_addr[texX * 4 + 4 * game->textures[game->raycasting.textNum].width * texY ]);
-		game->img.addr[(game->raycasting.x) * 4 + (4 * game->camera.ris_x * (game->raycasting.y)) + 1] = (int)(game->textures[game->raycasting.textNum].texture_addr[texX * 4 + 4 * game->textures[game->raycasting.textNum].width * texY + 1]);
-		game->img.addr[(game->raycasting.x) * 4 + (4 * game->camera.ris_x * (game->raycasting.y)) + 2] = (int)(game->textures[game->raycasting.textNum].texture_addr[texX * 4 + 4 * game->textures[game->raycasting.textNum].width * texY + 2]);				
-		if (game->mods.Drunk)
-			game->img.addr[(game->raycasting.x) * 4 + (4 * game->camera.ris_x * (game->raycasting.y)) + 3] = (char) 200;
+		color = ft_get_pixel(&game->textures[game->raycasting.textNum], texX, texY);
+		ft_put_pixel_base(&game->img, game->raycasting.x, game->raycasting.y, color);
 		game->raycasting.y++;
 	}
 	while(game->raycasting.y < game->camera.ris_y)
 	{
 		ft_put_pixel_base(&game->img, game->raycasting.x, game->raycasting.y, 0xcaa472);
-		if (game->mods.Drunk)
-			game->img.addr[game->raycasting.x * 4 + game->raycasting.y * game->camera.ris_x * 4 + 3] = (char)200; 
 		game->raycasting.y++;
 	}
 }
 
 void	ft_raycasting(t_game *game)
 {
-	int map[24][24]=
-	{
-		{1,1,1,1,1,1,2,3,4,5,6,7,8,1,1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,8,8,8,8,8,0,0,0,0,3,0,3,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,8,0,0,0,0,3,0,0,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,10,0,10,8,0,0,0,0,3,0,3,0,3,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,4,4,4,4,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,4,4,4,4,4,4,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-	};
-	game->raycasting.x = 0;
+	double wallX;
+	int texX; 
 
+	int map[24][24] = {
+	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
+	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,3,0,0,0,3,3,3,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,3,0,0,0,3,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,0,0,0,0,0,0,0,1},
+	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+	};
+
+	game->raycasting.x = 0;
 	ft_init_texture(game);
 	while(game->raycasting.x < game->camera.ris_x)
 	{
-		double wallX;
-		int texX; 
-
 		game = ft_raycast_zero(game, map);
 		if (game->mods.Wall_rotate)
 		{

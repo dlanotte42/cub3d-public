@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:02 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/03/25 01:43:15 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/03/25 20:44:13 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,29 +51,11 @@ void	ft_set_parameters(t_game *game)
 	//ft_create_map(game);
 }
 
-t_game	*ft_raycast_set_block(t_game *game, int map[24][24])
+t_game	*ft_raycast_set_block(t_game *game)
 {
-	if (map[game->raycasting.mapX][game->raycasting.mapY] == 1)
-		game->raycasting.textNum = 0;
-	else if (map[game->raycasting.mapX][game->raycasting.mapY] == 2)
-		game->raycasting.textNum = 1;
-	else if (map[game->raycasting.mapX][game->raycasting.mapY] == 3)
-		game->raycasting.textNum = 2;
-	else if (map[game->raycasting.mapX][game->raycasting.mapY] == 4)
-		game->raycasting.textNum = 3;
-	else if (map[game->raycasting.mapX][game->raycasting.mapY] == 5)
-		game->raycasting.textNum = 4;
-	else if (map[game->raycasting.mapX][game->raycasting.mapY] == 6)
-		game->raycasting.textNum = 5;
-	else if (map[game->raycasting.mapX][game->raycasting.mapY] == 7)
-		game->raycasting.textNum = 6;
-	else if (map[game->raycasting.mapX][game->raycasting.mapY] == 8)
-		game->raycasting.textNum = 7;
-	else if (map[game->raycasting.mapX][game->raycasting.mapY] == 9)
-		game->raycasting.textNum = 8;
-	else if (map[game->raycasting.mapX][game->raycasting.mapY] == 10)
-		game->raycasting.textNum = 9;
+	if (game->raycasting.side == 0)
+		game->raycasting.textNum = (game->raycasting.stepX > 0) ? 0 : 1;
 	else
-		game->raycasting.textNum = 10;
+		game->raycasting.textNum = (game->raycasting.stepY > 0) ? 2 : 3;
 	return (game);
 }
