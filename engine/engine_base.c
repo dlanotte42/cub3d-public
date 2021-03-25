@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:43:47 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/25 01:25:23 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/03/25 01:53:16 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,17 @@
 
 static void		ft_init_texture(t_game *game)
 {
-	int a,b,c,d,e,f;
+	int a,b,c;
+	int i;
 
-	game->textures[0].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[0].texture_path, 
-		&game->textures[0].width, &game->textures[0].height);
-	game->textures[0].texture_addr = mlx_get_data_addr(game->textures[0].texture, &d, &e, &f);
-	game->textures[1].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[1].texture_path, 
-		&game->textures[1].width, &game->textures[1].height);
-	game->textures[1].texture_addr = mlx_get_data_addr(game->textures[1].texture, &a, &b, &c);
-	game->textures[2].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[2].texture_path, 
-		&game->textures[2].width, &game->textures[2].height);
-	game->textures[2].texture_addr = mlx_get_data_addr(game->textures[2].texture, &d, &e, &f);
-	game->textures[3].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[3].texture_path, 
-		&game->textures[3].width, &game->textures[3].height);
-	game->textures[3].texture_addr = mlx_get_data_addr(game->textures[3].texture, &d, &e, &f);
-	game->textures[4].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[4].texture_path, 
-		&game->textures[4].width, &game->textures[4].height);
-	game->textures[4].texture_addr = mlx_get_data_addr(game->textures[4].texture, &d, &e, &f);
-	game->textures[5].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[5].texture_path, 
-		&game->textures[5].width, &game->textures[5].height);
-	game->textures[5].texture_addr = mlx_get_data_addr(game->textures[5].texture, &d, &e, &f);
-	game->textures[6].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[6].texture_path, 
-		&game->textures[6].width, &game->textures[6].height);
-	game->textures[6].texture_addr = mlx_get_data_addr(game->textures[6].texture, &d, &e, &f);
-	game->textures[7].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[7].texture_path, 
-		&game->textures[7].width, &game->textures[7].height);
-	game->textures[7].texture_addr = mlx_get_data_addr(game->textures[7].texture, &d, &e, &f);
-	game->textures[8].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[8].texture_path, 
-		&game->textures[8].width, &game->textures[8].height);
-	game->textures[8].texture_addr = mlx_get_data_addr(game->textures[8].texture, &d, &e, &f);
-	game->textures[9].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[9].texture_path, 
-		&game->textures[9].width, &game->textures[9].height);
-	game->textures[9].texture_addr = mlx_get_data_addr(game->textures[9].texture, &d, &e, &f);
-	game->textures[10].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[10].texture_path, 
-		&game->textures[10].width, &game->textures[10].height);
-	game->textures[10].texture_addr = mlx_get_data_addr(game->textures[10].texture, &d, &e, &f);
+	i = 0;
+	while (i < 10)
+	{
+		game->textures[i].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[i].texture_path, 
+			&game->textures[i].width, &game->textures[i].height);
+		game->textures[i].texture_addr = mlx_get_data_addr(game->textures[i].texture, &a, &b, &c);
+		i++;
+	}
 }
 
 static	void	ft_print_w_a_t(t_game *game, int drawStart, int drawEnd, int lineHeight, int texX)
@@ -132,7 +108,7 @@ void	ft_raycasting(t_game *game)
 			if(game->raycasting.side == 0) 
 				wallX = game->player.pos_x + game->raycasting.perpWallDist * game->raycasting.rayDirY; 
 			else          					
-				wallX = game->player.pos_y + game->raycasting.perpWallDist * game->raycasting.rayDirX; 
+				wallX = game->player.pos_x + game->raycasting.perpWallDist * game->raycasting.rayDirX; 
 		}
 		else
 		{

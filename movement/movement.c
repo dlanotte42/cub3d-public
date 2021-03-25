@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:02:28 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/25 01:29:54 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/03/25 01:50:13 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ static void	ft_mods(int keycode, t_game *game)
 		game->mods.Drunk = TRUE;
 	else if (keycode == DRUNK_KEY && game->mods.Drunk)
 		game->mods.Drunk = FALSE;
+	else if (keycode == TAP_KEY && !game->mods.Wall_rotate)
+		game->mods.Wall_rotate = TRUE;
+	else if (keycode == TAP_KEY && game->mods.Wall_rotate)
+		game->mods.Wall_rotate = FALSE;
 }
 
-static	void ft_cam_move(t_game *game, int map[24][24])
+static	void ft_cam_move(t_game *game)
 {
 	if (game->movement.cam_right)
 	{
@@ -74,7 +78,7 @@ void		ft_move(t_game *game, int map[24][24])
 		if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_y * game->player.speed)])) 
 			game->player.pos_y -= game->player.dir_y * game->player.speed;
 	}	
-	ft_cam_move(game, map);
+	ft_cam_move(game);
 }
 
 int			onPressButton(int keycode, t_game *game)
@@ -94,8 +98,13 @@ int			onPressButton(int keycode, t_game *game)
 		game->movement.cam_right = TRUE;
 	if (keycode == LEFT_KEY)
 		game->movement.cam_left = TRUE;
+	if (keycode == RUN_KEY)
+		game->player.speed += 0.000090;
 	if (keycode == DRUNK_KEY)
 		ft_mods(keycode, game);
+	if (keycode == TAP_KEY)
+		ft_mods(keycode, game);
+	printf("KEY %d \n SPEED: %f\n", keycode ,game->player.speed);
 	return (0);
 }
 
@@ -115,5 +124,8 @@ int			onReleseButton(int keycode, t_game *game)
 		game->movement.cam_right = FALSE;
 	if (keycode == LEFT_KEY)
 		game->movement.cam_left = FALSE;
+	if (keycode == RUN_KEY)
+		game->player.speed = 0.000090;
+	
 	return (0);
 }
