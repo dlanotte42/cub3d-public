@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:02:28 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/25 00:07:29 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/03/25 01:29:54 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,57 +20,61 @@ static void	ft_mods(int keycode, t_game *game)
 		game->mods.Drunk = FALSE;
 }
 
+static	void ft_cam_move(t_game *game, int map[24][24])
+{
+	if (game->movement.cam_right)
+	{
+		game->raycasting.oldDirX = game->player.dir_x;
+		game->player.dir_x = game->player.dir_x * cos(-game->player.rotation_speed) - game->player.dir_y * sin(-game->player.rotation_speed);
+		game->player.dir_y = game->raycasting.oldDirX * sin(-game->player.rotation_speed) + game->player.dir_y * cos(-game->player.rotation_speed);
+		game->raycasting.oldPlaneX = game->player.plane_x;
+		game->player.plane_x = game->player.plane_x * cos(-game->player.rotation_speed) - game->player.plane_y * sin(-game->player.rotation_speed);
+		game->player.plane_y = game->raycasting.oldPlaneX * sin(-game->player.rotation_speed) + game->player.plane_y * cos(-game->player.rotation_speed);
+	}
+	if (game->movement.cam_left)
+	{
+		game->raycasting.oldDirX = game->player.dir_x;
+		game->player.dir_x = game->player.dir_x * cos(game->player.rotation_speed) - game->player.dir_y * sin(game->player.rotation_speed);
+		game->player.dir_y = game->raycasting.oldDirX * sin(game->player.rotation_speed) + game->player.dir_y * cos(game->player.rotation_speed);
+		game->raycasting.oldPlaneX = game->player.plane_x;
+		game->player.plane_x = game->player.plane_x * cos(game->player.rotation_speed) - game->player.plane_y * sin(game->player.rotation_speed);
+		game->player.plane_y = game->raycasting.oldPlaneX * sin(game->player.rotation_speed) + game->player.plane_y * cos(game->player.rotation_speed);
+	}
+}
+
 void		ft_move(t_game *game, int map[24][24])
 {
-		if (game->movement.right)
-		{
-			if(!(map[(int)(game->player.pos_x + game->player.dir_y * game->player.speed)][(int)(game->player.pos_y)]))
-				game->player.pos_x += game->player.dir_y * game->player.speed;
-			if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_x * game->player.speed)]))
-				game->player.pos_y -= game->player.dir_x * game->player.speed;
-		}
+	if (game->movement.right)
+	{
+		if(!(map[(int)(game->player.pos_x + game->player.dir_y * game->player.speed)][(int)(game->player.pos_y)]))
+			game->player.pos_x += game->player.dir_y * game->player.speed;
+		if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_x * game->player.speed)]))
+			game->player.pos_y -= game->player.dir_x * game->player.speed;
+	}
 
-		if (game->movement.left)
-		{
-			if(!(map[(int)(game->player.pos_x - game->player.dir_y * game->player.speed)][(int)(game->player.pos_y)]))
-				game->player.pos_x -= game->player.dir_y * game->player.speed;
-			if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y + game->player.dir_x * game->player.speed)]))
-				game->player.pos_y += game->player.dir_x * game->player.speed;
-		}
+	if (game->movement.left)
+	{
+		if(!(map[(int)(game->player.pos_x - game->player.dir_y * game->player.speed)][(int)(game->player.pos_y)]))
+			game->player.pos_x -= game->player.dir_y * game->player.speed;
+		if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y + game->player.dir_x * game->player.speed)]))
+			game->player.pos_y += game->player.dir_x * game->player.speed;
+	}
 
-		if (game->movement.up)
-		{
-			if(!(map[(int)(game->player.pos_x + game->player.dir_x * game->player.speed)][(int)game->player.pos_y]))
-			 	game->player.pos_x += game->player.dir_x * game->player.speed;
-			if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_x + game->player.dir_y * game->player.speed)]))
-				 game->player.pos_y += game->player.dir_y * game->player.speed;
-		}
-		if (game->movement.down)
-		{
-			if(!(map[(int)(game->player.pos_x - game->player.dir_x * game->player.speed)][(int)(game->player.pos_y)])) 
-				game->player.pos_x -= game->player.dir_x * game->player.speed;
-      		if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_y * game->player.speed)])) 
-			  	game->player.pos_y -= game->player.dir_y * game->player.speed;
-		}
-
-		if (game->movement.cam_right)
-		{
-			game->raycasting.oldDirX = game->player.dir_x;
-			game->player.dir_x = game->player.dir_x * cos(-game->player.rotation_speed) - game->player.dir_y * sin(-game->player.rotation_speed);
-			game->player.dir_y = game->raycasting.oldDirX * sin(-game->player.rotation_speed) + game->player.dir_y * cos(-game->player.rotation_speed);
-			game->raycasting.oldPlaneX = game->player.plane_x;
-			game->player.plane_x = game->player.plane_x * cos(-game->player.rotation_speed) - game->player.plane_y * sin(-game->player.rotation_speed);
-			game->player.plane_y = game->raycasting.oldPlaneX * sin(-game->player.rotation_speed) + game->player.plane_y * cos(-game->player.rotation_speed);
-		}
-		if (game->movement.cam_left)
-		{
-			game->raycasting.oldDirX = game->player.dir_x;
-			game->player.dir_x = game->player.dir_x * cos(game->player.rotation_speed) - game->player.dir_y * sin(game->player.rotation_speed);
-			game->player.dir_y = game->raycasting.oldDirX * sin(game->player.rotation_speed) + game->player.dir_y * cos(game->player.rotation_speed);
-			game->raycasting.oldPlaneX = game->player.plane_x;
-			game->player.plane_x = game->player.plane_x * cos(game->player.rotation_speed) - game->player.plane_y * sin(game->player.rotation_speed);
-			game->player.plane_y = game->raycasting.oldPlaneX * sin(game->player.rotation_speed) + game->player.plane_y * cos(game->player.rotation_speed);
-		}
+	if (game->movement.up)
+	{
+		if(!(map[(int)(game->player.pos_x + game->player.dir_x * game->player.speed)][(int)game->player.pos_y]))
+			game->player.pos_x += game->player.dir_x * game->player.speed;
+		if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_x + game->player.dir_y * game->player.speed)]))
+				game->player.pos_y += game->player.dir_y * game->player.speed;
+	}
+	if (game->movement.down)
+	{
+		if(!(map[(int)(game->player.pos_x - game->player.dir_x * game->player.speed)][(int)(game->player.pos_y)])) 
+			game->player.pos_x -= game->player.dir_x * game->player.speed;
+		if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_y * game->player.speed)])) 
+			game->player.pos_y -= game->player.dir_y * game->player.speed;
+	}	
+	ft_cam_move(game, map);
 }
 
 int			onPressButton(int keycode, t_game *game)
