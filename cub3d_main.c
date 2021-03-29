@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 16:43:37 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/27 15:51:06 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/29 16:56:44 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,26 @@ void	ft_init_mlx(t_game *game)
 	game->vars.win = mlx_new_window(game->vars.mlx, game->camera.ris_x, game->camera.ris_y, "min3d");
 }
 
+static void		ft_init_texture(t_game *game)
+{
+	int i;
+
+	i = 0;
+	while (i < 10)
+	{
+		game->textures[i].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[i].texture_path, 
+			&game->textures[i].width, &game->textures[i].height);
+		game->textures[i].texture_addr = mlx_get_data_addr(game->textures[i].texture, &game->textures[i].bits_per_pixel, &game->textures[i].line_length, &game->textures[i].endian);
+		i++;
+	}
+}
+
 int		render_game_loop(t_game *game)
 {
-	int x,y;
-
 	ft_raycasting(game);
 	ft_re_create_img(game);
 	mlx_mouse_hide();
-	mlx_mouse_get_pos(game->vars.win, &x, &y);
-	printf("\nX: %d\nY: %d", x, y);
-	if (game->camera.destroy == TRUE)
-		mlx_destroy_window(game->vars.mlx, game->vars.win);
+	//mlx_mouse_get_pos(game->vars.win, &x, &y);
 	return (0);
 }
 

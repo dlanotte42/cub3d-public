@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/27 15:49:47 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/29 16:37:06 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,28 @@ typedef struct	s_camera {
 	int				destroy;
 }				t_camera;
 
+typedef struct s_sprite
+{
+  double 			x;
+  double 			y;
+  int texture;
+}				t_sprite;
+
+typedef struct	s_floor {
+	float			rayDirX0;
+	float			rayDirY0;
+	float			rayDirX1;
+	float			rayDirY1;
+	int 			p; 
+	float 			posZ;
+	float 			rowDistance;
+	float 			floorStepX;
+	float 			floorStepY;
+	float 			floorX;
+	float 			floorY;
+	int 			x;
+}				t_floor;
+
 typedef struct 	s_textures {
 	void			*texture;
 	int				height;
@@ -114,6 +136,7 @@ typedef struct s_raycasting {
 	double 			oldDirX;
 	double 			oldPlaneX;
 	t_ray_value		Addvalues;
+	t_floor			floor;
 }				t_raycasting;
 
 typedef struct	s_game{

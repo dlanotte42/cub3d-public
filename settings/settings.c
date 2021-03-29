@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:02 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/03/27 15:51:40 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/29 17:28:05 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	ft_set_parameters(t_game *game)
 {
 	game->player.pos_x = 12;
 	game->player.pos_y = 10;
-	game->player.dir_x = -1;
-	game->player.dir_y = 0;
+	game->player.dir_x = -1.0;
+	game->player.dir_y = 0.0;
 	game->player.plane_x = 0;
 	game->player.plane_y = 0.66;
-	game->player.rotation_speed = 0.000050;
+	game->player.rotation_speed = 0.000080;
 	game->player.speed = 0.000090;
 
 	game->textures[0].texture_path = "./texture/bluestone.xpm";
@@ -33,10 +33,10 @@ void	ft_set_parameters(t_game *game)
 	game->textures[7].texture_path = "./texture/purplestone.xpm";
 	game->textures[8].texture_path = "./texture/swastika.xpm";
 	game->textures[9].texture_path = "./texture/swastika-2.xpm";
-	game->textures[10].texture_path = "./texture/fake_door.xpm";
+	game->textures[10].texture_path = "./texture/pillar.xpm";
 
-	game->camera.ris_x = 1920;
-	game->camera.ris_y = 1080;
+	game->camera.ris_x = 800;
+	game->camera.ris_y = 600;
 	game->camera.destroy = FALSE;
 
 	game->mods.Drunk = FALSE;

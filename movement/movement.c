@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:02:28 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/27 15:50:05 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/29 17:24:43 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int			onPressButton(int keycode, t_game *game)
 		ft_mods(keycode, game);
 	if (keycode == TAP_KEY)
 		ft_mods(keycode, game);
-	printf("KEY %d \n SPEED: %f\n", keycode ,game->player.speed);
+	//printf("KEY %d \n SPEED: %f\n", keycode ,game->player.speed);
 	return (0);
 }
 
