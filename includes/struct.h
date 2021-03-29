@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/25 20:23:16 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/27 15:49:47 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct	s_player {
 typedef struct	s_camera {
 	int				ris_x;
 	int				ris_y;
+	int				destroy;
 }				t_camera;
 
 typedef struct 	s_textures {
@@ -87,9 +88,9 @@ typedef struct 	s_textures {
 }				t_textures;
 
 typedef	struct	s_ray_value {
-	int			drawStart;
-	int			drawEnd;
-	int			lineheight;
+	int				drawStart;
+	int				drawEnd;
+	int				lineheight;
 }				t_ray_value;
 
 typedef struct s_raycasting {

@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:43:47 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/25 20:42:27 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/27 16:47:21 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static	void	ft_print_w_a_t(t_game *game, int drawStart, int drawEnd, int lineHei
 		ft_put_pixel_base(&game->img, game->raycasting.x, game->raycasting.y, color);
 		game->raycasting.y++;
 	}
+
+
 	while(game->raycasting.y < game->camera.ris_y)
 	{
 		ft_put_pixel_base(&game->img, game->raycasting.x, game->raycasting.y, 0xcaa472);

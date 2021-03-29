@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 16:43:37 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/25 00:22:06 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/03/27 15:51:06 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,15 @@ void	ft_init_mlx(t_game *game)
 
 int		render_game_loop(t_game *game)
 {
+	int x,y;
+
 	ft_raycasting(game);
 	ft_re_create_img(game);
+	mlx_mouse_hide();
+	mlx_mouse_get_pos(game->vars.win, &x, &y);
+	printf("\nX: %d\nY: %d", x, y);
+	if (game->camera.destroy == TRUE)
+		mlx_destroy_window(game->vars.mlx, game->vars.win);
 	return (0);
 }
 

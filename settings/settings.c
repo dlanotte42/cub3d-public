@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:02 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/03/25 20:44:13 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/27 15:51:40 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ void	ft_set_parameters(t_game *game)
 	game->textures[9].texture_path = "./texture/swastika-2.xpm";
 	game->textures[10].texture_path = "./texture/fake_door.xpm";
 
-	game->camera.ris_x = 1280;
-	game->camera.ris_y = 720;
+	game->camera.ris_x = 1920;
+	game->camera.ris_y = 1080;
+	game->camera.destroy = FALSE;
 
 	game->mods.Drunk = FALSE;
 	game->mods.Wall_rotate = FALSE;

@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:02:28 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/25 20:38:46 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/27 15:50:05 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ int			onPressButton(int keycode, t_game *game)
 {
 	//printf("Hello from keycode: %d key_hook!\n", keycode);
 	if (keycode == 53)
-		mlx_destroy_window(game->vars.mlx, game->vars.win);
+		game->camera.destroy = TRUE;
+		
 	if (keycode == A_KEY)
 		game->movement.left = TRUE;
 	if (keycode == S_KEY)
@@ -126,6 +127,5 @@ int			onReleseButton(int keycode, t_game *game)
 		game->movement.cam_left = FALSE;
 	if (keycode == RUN_KEY)
 		game->player.speed = 0.000090;
-	
 	return (0);
 }
