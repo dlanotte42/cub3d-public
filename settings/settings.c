@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:02 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/03/29 17:28:05 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/29 17:37:30 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	ft_set_parameters(t_game *game)
 	game->textures[9].texture_path = "./texture/swastika-2.xpm";
 	game->textures[10].texture_path = "./texture/pillar.xpm";
 
-	game->camera.ris_x = 800;
-	game->camera.ris_y = 600;
+	game->camera.ris_x = 1280;
+	game->camera.ris_y = 720;
 	game->camera.destroy = FALSE;
 
 	game->mods.Drunk = FALSE;

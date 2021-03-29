@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/29 16:37:06 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/29 17:45:31 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_sprite
 {
   double 			x;
   double 			y;
-  int texture;
+  int 				texture;
 }				t_sprite;
 
 typedef struct	s_floor {
