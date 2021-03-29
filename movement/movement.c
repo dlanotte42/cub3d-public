@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:02:28 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/29 17:24:43 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/29 19:09:36 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,12 @@ void		ft_move(t_game *game, int map[24][24])
 }
 
 int			onPressButton(int keycode, t_game *game)
-{
-	//printf("Hello from keycode: %d key_hook!\n", keycode);
+{	
 	if (keycode == 53)
-		game->camera.destroy = TRUE;
-		
+	{
+		mlx_destroy_window(game->vars.mlx, game->vars.win);
+		exit(0);
+	}
 	if (keycode == A_KEY)
 		game->movement.left = TRUE;
 	if (keycode == S_KEY)
@@ -105,14 +106,11 @@ int			onPressButton(int keycode, t_game *game)
 		ft_mods(keycode, game);
 	if (keycode == TAP_KEY)
 		ft_mods(keycode, game);
-	//printf("KEY %d \n SPEED: %f\n", keycode ,game->player.speed);
 	return (0);
 }
 
 int			onReleseButton(int keycode, t_game *game)
 {
-	if (keycode == 53)
-		mlx_destroy_window(game->vars.mlx, game->vars.win);
 	if (keycode == A_KEY)
 		game->movement.left = FALSE;
 	if (keycode == S_KEY)

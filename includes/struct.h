@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/29 17:45:31 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/03/29 19:12:09 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,8 @@ typedef struct	s_game{
 	t_mod			mods;
 	t_raycasting	raycasting;
 	int				map[24][24];
+	t_sprite		sprites[16];
+	int				sprites_counter;
 }				t_game;
 
 #endif
