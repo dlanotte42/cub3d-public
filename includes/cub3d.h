@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 16:17:36 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/27 14:44:19 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/02 17:55:35 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <math.h>
 # include <unistd.h>
+# include <fcntl.h>
 # include "../mlx/mlx.h"
 # include "struct.h"
 # include "engine.h"

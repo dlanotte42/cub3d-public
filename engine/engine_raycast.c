@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 00:12:59 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/03/29 19:18:36 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/02 18:34:28 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ static t_game	*ft_raycast_one(t_game *game, int map[24][24])
 			game->raycasting.hit = 1;
 		else if (map[game->raycasting.mapX][game->raycasting.mapY] == 2)
 		{
-			game->sprites[game->sprites_counter].x = game->raycasting.mapX;
-			game->sprites[game->sprites_counter].y = game->raycasting.mapY;
+			game->sprites[game->sprites_counter].x = game->raycasting.mapX + 0.5;
+			game->sprites[game->sprites_counter].y = game->raycasting.mapY + 0.5;
 			game->sprites[game->sprites_counter].texture = 10;
 			game->sprites_counter++;
 		}

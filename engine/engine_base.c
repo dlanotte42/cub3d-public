@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:43:47 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/29 19:21:22 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/02 18:33:09 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static	void	ft_print_w_a_t(t_game *game, int drawStart, int drawEnd, int lineHei
 	double 			step;
 	double 			texPos;
 	unsigned int 	color;
-
 
 	step = 1.0 * game->textures[game->raycasting.textNum].height / lineHeight;
     texPos = (drawStart - game->camera.ris_y / 2 + lineHeight / 2) * step;
@@ -60,24 +59,6 @@ void swap_dio(int *xp, int *yp)
     int temp = *xp;
     *xp = *yp;
     *yp = temp;
-}
-
-void	ft_create_sprites_map(t_game *game, int map[24][24]){
-	int 	counter = 0;
-	int		j = 0, i = 0;
-
-	while(j < 24)
-	{
-		while(i < 24)
-		{
-			if (map[j][i] == 2)
-				counter++;
-			i++;
-		}
-		j++;
-	}
-	printf("%d", counter);
-	fflush(stdout);
 }
 
 void sortSprites(int* order, double* dist, int amount)
@@ -119,18 +100,18 @@ void	ft_raycasting(t_game *game)
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,1,0,1,0,1,0,0,0,1},
-        {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,1,0,0,0,1,0,0,0,1},
-        {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,1,0,1,0,1,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
+        {1,0,0,0,0,0,1,2,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1},
+        {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,1,1,0,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
+        {1,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1},
+        {1,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+        {1,0,0,0,0,3,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,1},
+        {1,0,0,0,0,3,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,3,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,1},
         {1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -141,7 +122,6 @@ void	ft_raycasting(t_game *game)
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
 	ft_init_texture(game);
-	ft_create_sprites_map(game, map);
     for(int y = game->camera.ris_y / 2 + 1; y < game->camera.ris_y; ++y)
     {
 		game->raycasting.floor.rayDirX0 = game->player.dir_x - game->player.plane_x;
@@ -181,7 +161,6 @@ void	ft_raycasting(t_game *game)
 			ft_put_pixel_base(&game->img, game->raycasting.floor.x, (game->camera.ris_y - y - 1), 0x00ccff);
 			game->raycasting.floor.x++;
 		}
-		
     }
 	game->raycasting.x = 0;
 	ft_init_texture(game);
@@ -222,24 +201,21 @@ void	ft_raycasting(t_game *game)
     }
     sortSprites(spriteOrder, spriteDistance, numSprites);
 
-    //after sorting the sprites, do the projection and draw them
     for(int i = 0; i < numSprites; i++)
     {
-      //translate sprite position to relative to camera
       double spriteX = game->sprites[spriteOrder[i]].x - game->player.pos_x;
       double spriteY = game->sprites[spriteOrder[i]].y - game->player.pos_y;
 
-      double invDet = 1.0 / (game->player.plane_x * game->player.dir_y - game->player.dir_x * game->player.plane_y); //required for correct matrix multiplication
+      double invDet = 1.0 / (game->player.plane_x * game->player.dir_y - game->player.dir_x * game->player.plane_y); 
 
       double transformX = invDet * (game->player.dir_y * spriteX - game->player.dir_x * spriteY);
-      double transformY = invDet * (-game->player.plane_y * spriteX + game->player.plane_x * spriteY); //this is actually the depth inside the screen, that what Z is in 3D, the distance of sprite to player, matching sqrt(spriteDistance[i])
+      double transformY = invDet * (-game->player.plane_y * spriteX + game->player.plane_x * spriteY); 
 
       int spriteScreenX = (int)((game->camera.ris_x / 2) * (1 + transformX / transformY));
       int spriteHeight = fabs((game->camera.ris_y / (transformY)));
-      //calculate lowest and highest pixel to fill in current stripe
-      int drawStartY = -spriteHeight / 2 + game->camera.ris_y / 2;// + vMoveScreen;
+      int drawStartY = -spriteHeight / 2 + game->camera.ris_y / 2;
       if(drawStartY < 0) drawStartY = 0;
-      int drawEndY = spriteHeight / 2 +game->camera.ris_y / 2;// + vMoveScreen;
+      int drawEndY = spriteHeight / 2 +game->camera.ris_y / 2;
       if(drawEndY >= game->camera.ris_y) drawEndY = game->camera.ris_y - 1;
 
       int spriteWidth = fabs((game->camera.ris_y / (transformY)));

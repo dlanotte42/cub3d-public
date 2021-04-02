@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:02:28 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/29 19:09:36 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/02 18:42:00 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,32 +50,32 @@ void		ft_move(t_game *game, int map[24][24])
 {
 	if (game->movement.right)
 	{
-		if(!(map[(int)(game->player.pos_x + game->player.dir_y * game->player.speed)][(int)(game->player.pos_y)]))
-			game->player.pos_x += game->player.dir_y * game->player.speed;
-		if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_x * game->player.speed)]))
-			game->player.pos_y -= game->player.dir_x * game->player.speed;
+		if((map[(int)(game->player.pos_x + game->player.dir_y * game->player.speed)][(int)(game->player.pos_y)]) != 1)
+				game->player.pos_x += game->player.dir_y * game->player.speed;
+		if((map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_x * game->player.speed)]) != 1)
+				game->player.pos_y -= game->player.dir_x * game->player.speed;
 	}
 
 	if (game->movement.left)
 	{
-		if(!(map[(int)(game->player.pos_x - game->player.dir_y * game->player.speed)][(int)(game->player.pos_y)]))
+		if((map[(int)(game->player.pos_x - game->player.dir_y * game->player.speed)][(int)(game->player.pos_y)]) != 1)
         	game->player.pos_x -= game->player.dir_y * game->player.speed;
-      	if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y + game->player.dir_x * game->player.speed)]))
+      	if((map[(int)(game->player.pos_x)][(int)(game->player.pos_y + game->player.dir_x * game->player.speed)]) != 1)
         	game->player.pos_y += game->player.dir_x * game->player.speed;
 	}
 
 	if (game->movement.up)
 	{
-		if(!(map[(int)(game->player.pos_x + game->player.dir_x * game->player.speed)][(int)game->player.pos_y])) 
+		if((map[(int)(game->player.pos_x + game->player.dir_x * game->player.speed)][(int)game->player.pos_y]) != 1) 
       		game->player.pos_x += game->player.dir_x * game->player.speed;
-		if(!(map[(int)game->player.pos_x][(int)(game->player.pos_y + game->player.dir_y * game->player.speed)]))
+		if((map[(int)game->player.pos_x][(int)(game->player.pos_y + game->player.dir_y * game->player.speed)]) != 1)
       		game->player.pos_y += game->player.dir_y * game->player.speed;
 	}
 	if (game->movement.down)
 	{
-		if(!(map[(int)(game->player.pos_x - game->player.dir_x * game->player.speed)][(int)(game->player.pos_y)])) 
+		if((map[(int)(game->player.pos_x - game->player.dir_x * game->player.speed)][(int)(game->player.pos_y)]) != 1) 
       		game->player.pos_x -= game->player.dir_x * game->player.speed;
-    	if(!(map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_y * game->player.speed)]))
+    	if((map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_y * game->player.speed)]) != 1)
       		game->player.pos_y -= game->player.dir_y * game->player.speed;
 	}	
 	ft_cam_move(game);

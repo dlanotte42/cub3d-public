@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 16:43:37 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/29 16:56:44 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/02 18:45:19 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,25 @@ int		render_game_loop(t_game *game)
 	ft_raycasting(game);
 	ft_re_create_img(game);
 	mlx_mouse_hide();
-	//mlx_mouse_get_pos(game->vars.win, &x, &y);
 	return (0);
 }
 
-int		main(void)
+void	ft_start_game(t_game *game)
+{
+	ft_init_mlx(game);
+	mlx_hook(game->vars.win, 2, 0L, onPressButton, &game);
+	mlx_hook(game->vars.win, 3, 0L, onReleseButton, &game);	
+	game->img.img = mlx_new_image(game->vars.mlx, game->camera.ris_x, game->camera.ris_y);
+	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_per_pixel, &game->img.line_length, &game->img.endian);
+	mlx_loop_hook(game->vars.mlx, render_game_loop, &game);
+	mlx_loop(game->vars.mlx);	
+}
+
+int		main(int argc, char **argv)
 {
 	t_game game;
 
-	ft_set_parameters(&game);
-	ft_init_mlx(&game);
-	mlx_hook(game.vars.win, 2, 0L, onPressButton, &game);
-	mlx_hook(game.vars.win, 3, 0L, onReleseButton, &game);	
-	game.img.img = mlx_new_image(game.vars.mlx, game.camera.ris_x, game.camera.ris_y);
-	game.img.addr = mlx_get_data_addr(game.img.img, &game.img.bits_per_pixel, &game.img.line_length, &game.img.endian);
-	mlx_loop_hook(game.vars.mlx, render_game_loop, &game);
-	mlx_loop(game.vars.mlx);
+	//ft_start_game(&game);
+	ft_set_parameters(&game, argc, argv);
 	return (0);
 }

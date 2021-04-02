@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:14:49 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/27 15:09:33 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/02 18:01:24 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-
 
 int					get_next_line(int fd, char **line);
 int					ft_return(char *str);
