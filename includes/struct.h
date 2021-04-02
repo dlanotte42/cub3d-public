@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/02 19:51:30 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/03 00:48:51 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,15 +148,15 @@ typedef struct	s_game{
 	t_textures		textures[11];
 	t_mod			mods;
 	t_raycasting	raycasting;
-	int				map[24][24];
+	int				**map;
 	t_sprite		sprites[16];
 	int				sprites_counter;
 }				t_game;
 
 typedef	struct		s_pars {
-    int     c_fd;
-    int     r;
-    int     x;
+    int     		c_fd;
+    int     		r;
+    int     		x;
 }					t_pars;
 
 typedef struct	s_str
@@ -166,17 +166,13 @@ typedef struct	s_str
 }				t_str;
 
 typedef struct  s_config {
-    int     ris_x;
-    int     ris_y;
-    int     f_color;
-    int     c_color;
-    char    *n_wall;
-	int		**map;
-    //char    *s_wall;
-    //char    *e_wall;
-    //char    *w_wall;
-    //char    *sprite_tex;
-    char		**array;
+    int     		ris_x;
+    int     		ris_y;
+    int     		f_color;
+    int     		c_color;
+    char    		*n_wall;
+	char			**map;
+    char			**array;
 }               t_config;
 
 

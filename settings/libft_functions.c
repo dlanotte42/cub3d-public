@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:49:42 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/02 19:52:56 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/03 01:00:55 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,20 @@ void		*ft_calloc(size_t count, size_t size)
 	if (home)
 		ft_memset(home, 0, (count * size));
 	return (home);
+}
+
+char 		*ft_strcpy(char *src)
+{
+	int i;
+	char *dest;
+
+	i = 0;
+	dest = ft_calloc(ft_strlen(src) + 1, 1);
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

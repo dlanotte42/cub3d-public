@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:53:45 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/02 20:13:25 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/03 00:59:10 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int		parse_line(char **array, t_config *config)
 	return 0;
 }
 
-size_t		ft_strlen2(const char *str)
+size_t		ft_intlen(int *str)
 {
 	size_t size;
 
@@ -143,7 +143,7 @@ size_t		ft_strlen2(const char *str)
 int	ft_custom_isdigit(char c)
 {
 	if (ft_isdigit(c))
-		if ((c - 48) > -1 && (c - 48) < 3)
+		if (((c - 48) > -1 && (c - 48) < 3))
 			return (1);
 	return (0);
 }
@@ -169,23 +169,60 @@ int		ft_check_maps(char *maps)
 	return (0);
 }
 
-void 	ft_create_map(char *line, int map_line, int **map)
+char *ft_strcpy_custom(char *src)
 {
-	int 	**recover;
+	int i;
+	char *dest;
 
-	map_line += 1;
-	
-	map = ft_calloc(4, map_line + 1);
-	map[0] = ft_calloc(4, ft_strlen(line));
-	map[0][0] = 3;
-	printf("%d\n", map[0][0]);
+	i = 0;
+	dest = ft_calloc(ft_strlen(src) + 1, 1);
+	while (src[i] != '\0')
+	{
+		if (src[i] == ' ')
+			dest[i] = '1';
+		else
+			dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
 
-	
-	if (!map)
-		printf("non valido\n");
+char 	**ft_create_map(t_config config, char *str, int map_line)
+{
+	char	**recover;
+	int		i;
+
+	i = 0;
+	if (map_line != 0)
+	{
+		recover  = ft_calloc(map_line, sizeof(char *));
+		while(i < map_line - 1)
+		{
+			recover[i] = ft_strcpy_custom(config.map[i]);
+			i++;
+		}
+		free(config.map);
+		config.map = ft_calloc(map_line + 1, sizeof(char *));
+		i = 0;
+		while(i < map_line - 1)
+		{
+			config.map[i] = ft_strcpy_custom(recover[i]);
+			i++;
+		}
+		config.map[i] = ft_strcpy_custom(str);
+		free(recover);
+	}
+	else
+	{
+		config.map = ft_calloc(map_line + 1, sizeof(char *));
+		config.map[0] = ft_strcpy_custom(str);
+	}
+	if (map_line > 0)
+		printf("%s\n", config.map[map_line - 1]);
 	else 
-		printf("valido");
-	free(map);
+		printf("%s\n", config.map[map_line]);
+	return (config.map);
 }
 
 t_config ft_parsing(int ac, char **av)
@@ -193,26 +230,24 @@ t_config ft_parsing(int ac, char **av)
 	char		*line;
 	t_pars		pars;
 	t_config	config;
-	//t_str		*map_buffer;
 	int			map_line;
 
-	map_line = 0;
 	pars.x = 1;
+	map_line = 0;
 	if (ac == 2 || ac == 3)
 	{
-		if (ac == 3 && ft_strcmp(av[pars.x], "--save") == 1)
+		if (ac == 3 && ft_strcmp(av[2], "--save") == 1)
 		{
 			write(1, "screenshot\n", 11);
 			pars.x = 2;
 		}				
 		if (!ft_check_file(av[pars.x]))
 		{
-			write(1, "Il file selezionato non è corretto.\n", 37);
+			write(1, "the selected file is not correct.\n", 37);
 			return (config);
 		}
 		if ((pars.c_fd = open(av[pars.x], O_RDONLY)) < 0)
 			return (config);
-		//map_buffer = NULL;
 		line = NULL;
 		config_init(&config);
 		while (get_next_line(pars.c_fd, &line) > 0)
@@ -220,25 +255,17 @@ t_config ft_parsing(int ac, char **av)
 			config.array = ft_split(line, ' ');
 			if (ft_check_maps(*config.array))
 			{
-				ft_create_map(line, map_line, config.map);	
+				config.map = ft_create_map(config, line, map_line);
 				map_line++;
 			}
 			else
 				parse_line(config.array, &config);
 			free(line);
 			free(config.array);
-			//line = NULL;
 		}
-		//printf("%s", line);
 		free(line);
 		line = NULL;
-
-		//if (r && ft_strlen(line) > 0)
-		//	r = !!str_add_back(&map_buffer, ft_strdup(line));
 		close(pars.c_fd);
-		//if (!r || !parse_map(config, map_buffer))
-		//	return (str_clear(&map_buffer));
-		//str_clear(&map_buffer);
 		return (config);
 	}
 	else
