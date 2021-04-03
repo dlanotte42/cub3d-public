@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:02:28 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/03 17:18:18 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/03 18:10:51 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static	void ft_cam_move(t_game *game)
 	}
 }
 
-void		ft_move(t_game *game, int map[24][24])
+void		ft_move(t_game *game, int **map)
 {
 	if (game->movement.right)
 	{

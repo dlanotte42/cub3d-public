@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:02 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/03 17:17:16 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/03 19:01:21 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_set_parameters(t_game *game, int argc, char **argv)
 	t_config config;
 
 	config = ft_parsing(argc, argv);
-	game->player.pos_x = 12;
+	game->player.pos_x = 1;
 	game->player.pos_y = 10;
 	game->player.dir_x = -1.0;
 	game->player.dir_y = 0.0;
@@ -25,6 +25,8 @@ void	ft_set_parameters(t_game *game, int argc, char **argv)
 	game->player.plane_y = 0.66;
 	game->player.rotation_speed = 0.000080;
 	game->player.speed = 0.000090;
+
+	game->map = config.map_def;
 
 	game->textures[0].texture_path = config.n_wall;
 	game->textures[1].texture_path = config.s_wall;

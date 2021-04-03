@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/03 17:03:55 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:48:38 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,9 @@ typedef struct  s_config {
 	char    		*w_wall;
 	char			*sprite_tex;
 	char			**map;
+	int				**map_def;
     char			**array;
+	int				map_line;
 }               t_config;
 
 

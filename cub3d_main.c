@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 16:43:37 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/03 00:45:45 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/03 18:57:13 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,6 @@ int		render_game_loop(t_game *game)
 	ft_re_create_img(game);
 	mlx_mouse_hide();
 	return (0);
-}
-
-void	ft_start_game(t_game *game)
-{
-	ft_init_mlx(game);
-	mlx_hook(game->vars.win, 2, 0L, onPressButton, &game);
-	mlx_hook(game->vars.win, 3, 0L, onReleseButton, &game);	
-	game->img.img = mlx_new_image(game->vars.mlx, game->camera.ris_x, game->camera.ris_y);
-	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_per_pixel, &game->img.line_length, &game->img.endian);
-	mlx_loop_hook(game->vars.mlx, render_game_loop, &game);
-	mlx_loop(game->vars.mlx);	
 }
 
 int		main(int argc, char **argv)

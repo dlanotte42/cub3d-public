@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:53:45 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/03 17:10:28 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/03 18:57:06 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,10 +204,7 @@ char *ft_strcpy_custom(char *src)
 	dest = ft_calloc(ft_strlen(src) + 1, 1);
 	while (src[i] != '\0')
 	{
-		if (src[i] == ' ')
-			dest[i] = '1';
-		else
-			dest[i] = src[i];
+		dest[i] = src[i];
 		i++;
 	}
 	dest[i] = '\0';
@@ -223,7 +220,7 @@ char 	**ft_create_map(t_config config, char *str, int map_line)
 	if (map_line != 0)
 	{
 		recover  = ft_calloc(map_line, sizeof(char *));
-		while(i < map_line - 1)
+		while(i < map_line)
 		{
 			recover[i] = ft_strcpy_custom(config.map[i]);
 			i++;
@@ -231,7 +228,7 @@ char 	**ft_create_map(t_config config, char *str, int map_line)
 		free(config.map);
 		config.map = ft_calloc(map_line + 1, sizeof(char *));
 		i = 0;
-		while(i < map_line - 1)
+		while(i < map_line)
 		{
 			config.map[i] = ft_strcpy_custom(recover[i]);
 			i++;
@@ -244,10 +241,6 @@ char 	**ft_create_map(t_config config, char *str, int map_line)
 		config.map = ft_calloc(map_line + 1, sizeof(char *));
 		config.map[0] = ft_strcpy_custom(str);
 	}
-	if (map_line > 0)
-		printf("%s\n", config.map[map_line - 1]);
-	else 
-		printf("%s\n", config.map[map_line]);
 	return (config.map);
 }
 
@@ -256,10 +249,9 @@ t_config ft_parsing(int ac, char **av)
 	char		*line;
 	t_pars		pars;
 	t_config	config;
-	int			map_line;
 
 	pars.x = 1;
-	map_line = 0;
+	config.map_line = 0;
 	if (ac == 2 || ac == 3)
 	{
 		if (ac == 3 && ft_strcmp(av[2], "--save") == 0)
@@ -281,8 +273,8 @@ t_config ft_parsing(int ac, char **av)
 			config.array = ft_split(line, ' ');
 			if (ft_check_maps(*config.array))
 			{
-				config.map = ft_create_map(config, line, map_line);
-				map_line++;
+				config.map = ft_create_map(config, line, config.map_line);
+				config.map_line++;
 			}
 			else
 				parse_line(config.array, &config);
@@ -292,6 +284,7 @@ t_config ft_parsing(int ac, char **av)
 		free(line);
 		line = NULL;
 		close(pars.c_fd);
+		config.map_def = ft_convert(config);
 		return (config);
 	}
 	else
