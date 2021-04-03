@@ -1,6 +1,6 @@
 R  800  600
 NO ./texture/bluestone.xpm
-SO ./path_to_the_south_texture
+SO ./texture/bluestone.xpm
 WE ./path_to_the_west_texture
 EA ./path_to_the_east_texture
 S ./path_to_the_sprite_texture

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:53:45 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/03 00:59:10 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:10:28 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int		check_ris(char **array, t_config *config)
 
 	x = ft_atoi(config->array[1]);
 	y = ft_atoi(config->array[2]);
-	if ((x > 0 && x <= 2560) && (y >= 0 && y <= 1600))
+	if ((x > 0 && x <= 2560) && (y >= 0 && y <= 1440))
 	{
 		config->ris_x = x;
 		config->ris_y = y;
@@ -117,17 +117,43 @@ int		check_ris(char **array, t_config *config)
 	}
 }
 
-int		parse_line(char **array, t_config *config)
+int     check_texture(char **array, t_config *config)
 {
-	if (*config->array == NULL)
-		return (0);
-	if (config->array[0][0] == 'R')
-		check_ris(array, config);
-	else if (config->array[0][0] == 'F')
-		check_floor(array, config);
-	else if (config->array[0][0] == 'C')
-		check_cielo(array, config);
-	return 0;
+    if (array[0][0] == 'N' && array[0][1] == 'O')
+        config->n_wall = ft_strdup(array[1]);
+    else if (array[0][0] == 'S' && array[0][1] == 'O')
+        config->s_wall = ft_strdup(array[1]);
+    else if (array[0][0] == 'W' && array[0][1] == 'E')
+        config->w_wall = ft_strdup(array[1]);
+    else if (array[0][0] == 'E' && array[0][1] == 'A')
+        config->e_wall = ft_strdup(array[1]);
+    else if (array[0][0] == 'S' && array[0][1] == 0)
+        config->sprite_tex = ft_strdup(array[1]);
+    return (0);
+}
+
+int     parse_line(char **array, t_config *config)
+{
+    if (*config->array == NULL)
+        return (0);
+    if (config->array[0][0] == 'R' && array[0][1] == 0)
+        check_ris(array, config);
+    else if (config->array[0][0] == 'F' && array[0][1] == 0)
+        check_floor(array, config);
+    else if (config->array[0][0] == 'C' && array[0][1] == 0)
+        check_cielo(array, config);
+    else if (config->array[0][0] == 'N' && config->array[0][1] == 'O')
+        check_texture(array, config);
+    else if (config->array[0][0] == 'S' && config->array[0][1] == 'O')
+        check_texture(array, config);
+    else if (config->array[0][0] == 'W' && config->array[0][1] == 'E')
+        check_texture(array, config);
+    else if (config->array[0][0] == 'E' && config->array[0][1] == 'A')
+        check_texture(array, config);
+    else if (config->array[0][0] == 'S')
+        check_texture(array, config);
+    //printf("%s\n", array[0]);
+    return 0;
 }
 
 size_t		ft_intlen(int *str)
@@ -236,7 +262,7 @@ t_config ft_parsing(int ac, char **av)
 	map_line = 0;
 	if (ac == 2 || ac == 3)
 	{
-		if (ac == 3 && ft_strcmp(av[2], "--save") == 1)
+		if (ac == 3 && ft_strcmp(av[2], "--save") == 0)
 		{
 			write(1, "screenshot\n", 11);
 			pars.x = 2;

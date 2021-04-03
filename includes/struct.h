@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/03 00:48:51 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:03:55 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,10 @@ typedef struct  s_config {
     int     		f_color;
     int     		c_color;
     char    		*n_wall;
+	char    		*e_wall;
+	char    		*s_wall;
+	char    		*w_wall;
+	char			*sprite_tex;
 	char			**map;
     char			**array;
 }               t_config;

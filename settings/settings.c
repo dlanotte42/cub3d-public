@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:02 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/03 01:00:54 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:17:16 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	ft_set_parameters(t_game *game, int argc, char **argv)
 	game->player.rotation_speed = 0.000080;
 	game->player.speed = 0.000090;
 
-	game->textures[0].texture_path = ft_strcpy(config.n_wall);
-	game->textures[1].texture_path = "./texture/greystone.xpm";
+	game->textures[0].texture_path = config.n_wall;
+	game->textures[1].texture_path = config.s_wall;
 	game->textures[2].texture_path = "./texture/colorstone.xpm";
 	game->textures[3].texture_path = "./texture/Dkstnrgt.xpm";
 	game->textures[4].texture_path = "./texture/mossy.xpm";

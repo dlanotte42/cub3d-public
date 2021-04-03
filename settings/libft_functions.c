@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:49:42 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/03 01:00:55 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:02:46 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,24 @@ char 		*ft_strcpy(char *src)
 	}
 	dest[i] = '\0';
 	return (dest);
+}
+
+char	*ft_strdup(const char *src)
+{
+	char	*new_src;
+	size_t	size;
+	size_t	i;
+
+	size = ft_strlen(src);
+	new_src = malloc((size + 1) * sizeof(char));
+	if (!new_src)
+		return (NULL);
+	i = 0;
+	while (src[i])
+	{
+		new_src[i] = src[i];
+		i++;
+	}
+	new_src[i] = '\0';
+	return (new_src);
 }

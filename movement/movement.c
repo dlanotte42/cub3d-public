@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:02:28 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/02 18:42:00 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:18:18 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void		ft_move(t_game *game, int map[24][24])
       		game->player.pos_x -= game->player.dir_x * game->player.speed;
     	if((map[(int)(game->player.pos_x)][(int)(game->player.pos_y - game->player.dir_y * game->player.speed)]) != 1)
       		game->player.pos_y -= game->player.dir_y * game->player.speed;
-	}	
+	}
 	ft_cam_move(game);
 }
 

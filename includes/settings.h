@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:58 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/03 00:59:42 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:03:04 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ char		**ft_split(char const *s, char c);
 t_config 	ft_parsing(int ac, char **av);
 void		*ft_calloc(size_t count, size_t size);
 char 		*ft_strcpy(char *src);
+char		*ft_strdup(const char *src);
 
 #endif
