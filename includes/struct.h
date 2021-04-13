@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/03 17:48:38 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/13 21:58:03 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,29 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef struct  s_data {
-    void        	*img;
-    char        	*addr;
-    int         	bits_per_pixel;
-    int         	line_length;
-    int         	endian;
-}               t_data;
+typedef struct s_data
+{
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+}				t_data;
 
-typedef struct s_mod {
+typedef struct s_mod
+{
 	int				Drunk;
 	int				Wall_rotate;
 }				t_mod;
 
-typedef struct  s_vars {
-    void        	*mlx;
-    void        	*win;
-}               t_vars;
+typedef struct s_vars
+{
+	void			*mlx;
+	void			*win;
+}				t_vars;
 
-typedef struct	s_movement {
+typedef struct s_movement
+{
 	int				up;
 	int				down;
 	int				left;
@@ -57,7 +61,8 @@ typedef struct	s_movement {
 	int				cam_left;
 }				t_movement;
 
-typedef struct	s_player {
+typedef struct s_player
+{
 	t_movement		player_mov;
 	double			pos_x;
 	double			pos_y;
@@ -69,7 +74,8 @@ typedef struct	s_player {
 	double			speed;
 }				t_player;
 
-typedef struct	s_camera {
+typedef struct s_camera
+{
 	int				ris_x;
 	int				ris_y;
 	int				destroy;
@@ -77,69 +83,72 @@ typedef struct	s_camera {
 
 typedef struct s_sprite
 {
-  double 			x;
-  double 			y;
-  int 				texture;
+	double			x;
+	double			y;
+	int				texture;
 }				t_sprite;
 
-typedef struct	s_floor {
+typedef struct s_floor
+{
 	float			rayDirX0;
 	float			rayDirY0;
 	float			rayDirX1;
 	float			rayDirY1;
-	int 			p; 
-	float 			posZ;
-	float 			rowDistance;
-	float 			floorStepX;
-	float 			floorStepY;
-	float 			floorX;
-	float 			floorY;
-	int 			x;
+	int				p;
+	float			posZ;
+	float			rowDistance;
+	float			floorStepX;
+	float			floorStepY;
+	float			floorX;
+	float			floorY;
+	int				x;
 }				t_floor;
 
-typedef struct 	s_textures {
+typedef struct s_textures
+{
 	void			*texture;
 	int				height;
 	int				width;
 	int				texture_endian;
 	char			*texture_path;
 	char			*texture_addr;
-	int         	bits_per_pixel;
-    int         	line_length;
-    int         	endian;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
 }				t_textures;
 
-typedef	struct	s_ray_value {
+typedef struct s_ray_value
+{
 	int				drawStart;
 	int				drawEnd;
 	int				lineheight;
 }				t_ray_value;
 
 typedef struct s_raycasting {
-	int 			y;
-	int 			x;
+	int				y;
+	int				x;
 	double			cameraX;
 	double			rayDirX;
 	double			rayDirY;
-	int 			mapX;
-    int 			mapY;
-	double 			sideDistX;
-    double 			sideDistY;
-	double 			deltaDistX;
-    double 			deltaDistY;
-    double 			perpWallDist;
-	int 			stepX;
-	int 			stepY;
+	int				mapX;
+	int				mapY;
+	double			sideDistX;
+	double			sideDistY;
+	double			deltaDistX;
+	double			deltaDistY;
+	double			perpWallDist;
+	int				stepX;
+	int				stepY;
 	int				hit;
-	int 			side;
+	int				side;
 	int				textNum;
-	double 			oldDirX;
-	double 			oldPlaneX;
+	double			oldDirX;
+	double			oldPlaneX;
 	t_ray_value		Addvalues;
 	t_floor			floor;
 }				t_raycasting;
 
-typedef struct	s_game{
+typedef struct s_game{
 	t_vars			vars;
 	t_data			img;
 	t_movement		movement;
@@ -153,33 +162,33 @@ typedef struct	s_game{
 	int				sprites_counter;
 }				t_game;
 
-typedef	struct		s_pars {
-    int     		c_fd;
-    int     		r;
-    int     		x;
-}					t_pars;
+typedef struct s_pars
+{
+	int				c_fd;
+	int				r;
+	int				x;
+}				t_pars;
 
-typedef struct	s_str
+typedef struct s_str
 {
 	char			*content;
 	struct s_str	*next;
 }				t_str;
 
-typedef struct  s_config {
-    int     		ris_x;
-    int     		ris_y;
-    int     		f_color;
-    int     		c_color;
-    char    		*n_wall;
-	char    		*e_wall;
-	char    		*s_wall;
-	char    		*w_wall;
+typedef struct s_config {
+	int				ris_x;
+	int				ris_y;
+	int				f_color;
+	int				c_color;
+	char			*n_wall;
+	char			*e_wall;
+	char			*s_wall;
+	char			*w_wall;
 	char			*sprite_tex;
 	char			**map;
 	int				**map_def;
-    char			**array;
+	char			**array;
 	int				map_line;
-}               t_config;
-
+}				t_config;
 
 #endif
