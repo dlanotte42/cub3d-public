@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 17:49:05 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/13 17:06:24 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/13 19:06:03 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int		**ft_convert(t_config config)
 	j = 0;
 	i = 0;
 	len = 0;
+	if (!ft_validate_map(config))
+		return (FALSE);
 	config.map_def = ft_calloc(config.map_line, sizeof(int *));
 	while (i < config.map_line)
 	{

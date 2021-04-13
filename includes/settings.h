@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:58 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/03 17:51:19 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/13 19:37:58 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ void		*ft_calloc(size_t count, size_t size);
 char 		*ft_strcpy(char *src);
 char		*ft_strdup(const char *src);
 int			**ft_convert(t_config config);
+void 		sortSprites(int* order, double* dist, int amount);
 
 #endif
