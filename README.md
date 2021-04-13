@@ -1,6 +1,6 @@
 # cub3d
 
-cub3d without texture, using minilibx_mms_20200219_beta (not minilibx_opengl) 
+cub3d with texture, using minilibx_mms_20200219_beta (not minilibx_opengl) 
 
 ### Installation
 ```bash
