@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 00:12:59 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/13 20:44:26 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/13 22:32:36 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static t_game	*ft_int_raycastone(t_game *game, int **map)
 	{
 		game->sprites[game->sprites_counter].x = game->raycasting.mapX + 0.5;
 		game->sprites[game->sprites_counter].y = game->raycasting.mapY + 0.5;
-		game->sprites[game->sprites_counter].texture = 10;
+		game->sprites[game->sprites_counter].texture = 5;
 		game->sprites_counter++;
 	}
 	return (game);

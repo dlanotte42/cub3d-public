@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:14:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/27 14:44:08 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/13 22:04:14 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
 
-size_t		ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!s)
@@ -24,10 +24,10 @@ size_t		ft_strlen(const char *s)
 	return (i);
 }
 
-void		*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char *d;
-	char *s;
+	char	*d;
+	char	*s;
 
 	d = (char *)dst;
 	s = (char *)src;
@@ -44,7 +44,7 @@ void		*ft_memmove(void *dst, const void *src, size_t len)
 	return (dst);
 }
 
-char		*join_str(char const *s1, char const *s2)
+char	*join_str(char const *s1, char const *s2)
 {
 	size_t	len_s1;
 	size_t	len_s2;
@@ -56,7 +56,8 @@ char		*join_str(char const *s1, char const *s2)
 	len_s1 = ft_strlen(s1);
 	len_s2 = ft_strlen(s2);
 	stot_len = len_s1 + len_s2 + 1;
-	if (!(result = malloc(sizeof(char) * stot_len)))
+	result = malloc(sizeof(char *) * stot_len);
+	if (!result)
 		return (0);
 	ft_memmove(result, s1, len_s1);
 	ft_memmove(result + len_s1, s2, len_s2);
@@ -65,9 +66,9 @@ char		*join_str(char const *s1, char const *s2)
 	return (result);
 }
 
-int			ft_return(char *str)
+int	ft_return(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)

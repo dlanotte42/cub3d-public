@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:14:12 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/03/27 15:09:42 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/13 22:21:05 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ char	*ft_get_save_c(char *save_c)
 		free(save_c);
 		return (0);
 	}
-	if (!(result = malloc(sizeof(char) * ((ft_strlen(save_c) - i) + 1))))
+	result = (malloc(sizeof(char) * ((ft_strlen(save_c) - i) + 1)));
+	if (!result)
 		return (0);
 	i++;
 	while (save_c[i])
@@ -49,7 +50,8 @@ char	*ft_get_line(char *str)
 		return (0);
 	while (str[i] && str[i] != '\n')
 		i++;
-	if (!(result = malloc(sizeof(char) * (i + 1))))
+	result = malloc(sizeof(char) * (i + 1));
+	if (!result)
 		return (0);
 	i = 0;
 	while (str[i] && str[i] != '\n')

@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:43:47 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/13 20:55:52 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/13 22:40:39 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		ft_init_texture(t_game *game)
 	int i;
 
 	i = 0;
-	while (i < 11)
+	while (i < 6)
 	{
 		game->textures[i].texture = mlx_xpm_file_to_image(game->vars.mlx, game->textures[i].texture_path, 
 			&game->textures[i].width, &game->textures[i].height);
@@ -78,8 +78,8 @@ void	ft_raycasting(t_game *game)
 			int cellX = (int)(game->raycasting.floor.floorX);
 			int cellY = (int)(game->raycasting.floor.floorY);
 
-			int tx = (int)(game->textures[5].width * (game->raycasting.floor.floorX - cellX)) & (game->textures[5].width - 1);
-			int ty = (int)(game->textures[5].height * (game->raycasting.floor.floorY - cellY)) & (game->textures[5].height - 1);
+			int tx = (int)(game->textures[4].width * (game->raycasting.floor.floorX - cellX)) & (game->textures[4].width - 1);
+			int ty = (int)(game->textures[4].height * (game->raycasting.floor.floorY - cellY)) & (game->textures[4].height - 1);
 
 			game->raycasting.floor.floorX += game->raycasting.floor.floorStepX;
 			game->raycasting.floor.floorY += game->raycasting.floor.floorStepY;
@@ -90,10 +90,10 @@ void	ft_raycasting(t_game *game)
 			else floorTexture = 4;
 			int color;
 
-			color = ft_get_pixel(&game->textures[6], tx, ty);
+			color = ft_get_pixel(&game->textures[4], tx, ty);
 			ft_put_pixel_base(&game->img, game->raycasting.floor.x, y, color);
 
-			color = ft_get_pixel(&game->textures[6], tx, ty);
+			color = ft_get_pixel(&game->textures[4], tx, ty);
 			ft_put_pixel_base(&game->img, game->raycasting.floor.x, (game->camera.ris_y - y - 1), 0x00ccff);
 			game->raycasting.floor.x++;
 		}
@@ -163,14 +163,14 @@ void	ft_raycasting(t_game *game)
 
       for(int stripe = drawStartX; stripe < drawEndX; stripe++)
       {
-        int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * game->textures[10].width / spriteWidth) / 256;
+        int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * game->textures[5].width / spriteWidth) / 256;
         if(transformY > 0 && stripe > 0 && stripe < game->camera.ris_x && transformY < ZBuffer[stripe])
         {
 			for(int y = drawStartY; y < drawEndY; y++) 
         	{
         	  int d = y * 256 - game->camera.ris_y * 128 + spriteHeight * 128; 
-        	  int texY = ((d * game->textures[10].height) / spriteHeight) / 256;
-			  int color = ft_get_pixel(&game->textures[10], texX, texY);
+        	  int texY = ((d * game->textures[5].height) / spriteHeight) / 256;
+			  int color = ft_get_pixel(&game->textures[5], texX, texY);
         	  if((color & 0xFFFFFF) != 0) 
 			  	ft_put_pixel_base(&game->img, stripe, y, color);
         	}

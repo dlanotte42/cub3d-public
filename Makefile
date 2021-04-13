@@ -6,7 +6,7 @@
 #    By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:19:58 by dlanotte          #+#    #+#              #
-#    Updated: 2021/04/03 00:41:06 by zxcvbinz         ###   ########.fr        #
+#    Updated: 2021/04/13 22:38:17 by zxcvbinz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ $(NAME): $(OBJS)
 	@ echo "Building the project..."
 	@ make -s -C mlx
 	@ mv mlx/${LIB} .
-	@ $(CC) -Lmlx  ${LIB} -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)
+	@ echo "$(CC) -Lmlx  ${LIB} -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)"
 	@ echo  "\nBuilding" ${GREEN} "[OK]"
 	@ make clean
 	@ echo ${COLOR_OFF} "\nDeleted *.o files" ${GREEN} "[OK]\n" 
