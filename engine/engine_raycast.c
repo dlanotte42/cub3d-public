@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 00:12:59 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/03 18:24:15 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/13 16:10:26 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static t_game	*ft_raycast_two(t_game *game, int lineHeight)
 
 static t_game	*ft_raycast_one(t_game *game, int **map)
 {
-
 	while (game->raycasting.hit == 0)
 	{
 		if(game->raycasting.sideDistX < game->raycasting.sideDistY)
@@ -60,7 +59,7 @@ static t_game	*ft_raycast_one(t_game *game, int **map)
 
 	game = ft_raycast_two(game, game->raycasting.Addvalues.lineheight);
 	return (game);
-	}
+}
 
 t_game			*ft_raycast_zero(t_game *game, int **map)
 {

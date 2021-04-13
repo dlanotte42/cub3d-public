@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:43:47 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/03 18:15:34 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/13 16:26:19 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void	ft_raycasting(t_game *game)
 		ft_print_w_a_t(game, game->raycasting.Addvalues.drawStart, 
 			game->raycasting.Addvalues.drawEnd, game->raycasting.Addvalues.lineheight, texX);
 		ft_move(game, game->map);
-		ZBuffer[game->raycasting.x] = game->raycasting.perpWallDist; 
+		ZBuffer[game->raycasting.x] = game->raycasting.perpWallDist;
 		game->raycasting.x++;
 	}
 

@@ -1,9 +1,9 @@
 R  800  600
 NO ./texture/bluestone.xpm
-SO ./texture/bluestone.xpm
+SO ./texture/colorstone.xpm
 WE ./path_to_the_west_texture
 EA ./path_to_the_east_texture
-S ./path_to_the_sprite_texture
+S ./texture/pillar.xpm
 F 220,100,0
 C 225,30,0
 

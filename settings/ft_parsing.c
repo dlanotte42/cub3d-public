@@ -6,11 +6,18 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 17:49:05 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/03 19:06:03 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/13 17:06:24 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+static int		ft_validate_map(t_config config)
+{
+	
+	
+	return (FALSE);
+}
 
 int		**ft_convert(t_config config)
 {

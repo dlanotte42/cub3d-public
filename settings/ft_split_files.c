@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_files.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:43:21 by fd-agnes          #+#    #+#             */
-/*   Updated: 2021/04/02 18:03:53 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/13 17:01:38 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static char		**occurences(char const *s, char c, size_t *size)
+static char	**occurences(char const *s, char c, size_t *size)
 {
 	char	*pt;
 	size_t	length;
@@ -41,7 +41,8 @@ static	char	*ft_copy(const char *src, size_t length)
 	char	*dst;
 
 	i = 0;
-	if ((dst = (char*)malloc((length + 1) * sizeof(char))))
+	dst = (char *)malloc((length + 1) * sizeof(char));
+	if (dst)
 	{
 		while (i < length)
 		{
@@ -83,7 +84,7 @@ static	void	fill(char **array, char const *s, char c, size_t size)
 		array[size - 2] = ft_copy(pt - length, length);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**array;
 	size_t	size;
