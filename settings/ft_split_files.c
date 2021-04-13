@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_files.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:43:21 by fd-agnes          #+#    #+#             */
-/*   Updated: 2021/04/13 17:01:38 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/13 20:48:31 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	**occurences(char const *s, char c, size_t *size)
 	}
 	if (length)
 		(*size)++;
-	return ((char**)malloc((*size) * sizeof(char *)));
+	return ((char **)malloc((*size) * sizeof(char *)));
 }
 
 static	char	*ft_copy(const char *src, size_t length)
