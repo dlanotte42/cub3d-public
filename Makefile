@@ -6,7 +6,7 @@
 #    By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:19:58 by dlanotte          #+#    #+#              #
-#    Updated: 2021/04/14 17:23:48 by dlanotte         ###   ########.fr        #
+#    Updated: 2021/04/14 17:29:30 by dlanotte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SCREENSHOT = screenshot/
 GNL =	get_next_line/
 CC = gcc
 LIB = libmlx.dylib
-#CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 SRCS = ${wildcard *.c} $(wildcard $(ENGINE)*.c) $(wildcard $(GNL)*.c) $(wildcard $(MOVEMENT)*.c) $(wildcard $(SETTINGS)*.c) $(wildcard $(SCREENSHOT)*.c)
 OBJS =  $(SRCS:.c=.o)
 %.o: %.c

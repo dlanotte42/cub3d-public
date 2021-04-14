@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine_raycast.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 00:12:59 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/13 22:32:36 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 17:31:43 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static t_game	*ft_raycast_one(t_game *game, int **map)
 	return (game);
 }
 
-static t_game	*ft_init_raycast_zero(t_game *game, int **map)
+static t_game	*ft_init_raycast_zero(t_game *game)
 {
 	if (game->raycasting.rayDirX < 0)
 	{
@@ -115,7 +115,7 @@ t_game	*ft_raycast_zero(t_game *game, int **map)
 	game->raycasting.deltaDistX = fabs(1 / game->raycasting.rayDirX);
 	game->raycasting.deltaDistY = fabs(1 / game->raycasting.rayDirY);
 	game->raycasting.hit = 0;
-	game = ft_init_raycast_zero(game, map);
+	game = ft_init_raycast_zero(game);
 	game = ft_raycast_one(game, map);
 	return (game);
 }

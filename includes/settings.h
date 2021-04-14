@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:58 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/13 21:49:31 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 17:36:46 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int			**ft_convert(t_config config);
 void		sortSprites(int *order, double *dist, int amount);
 int			ft_strcmp(const char *s1, const char *s2);
 void		config_init(t_config *config);
-void		check_floor(char **array, t_config *config);
+void		check_floor(t_config *config);
 int			ft_check_file(char *file);
-void		check_cielo(char **array, t_config *config);
+void		check_cielo(t_config *config);
 int			parse_line(char **array, t_config *config);
 t_config	ft_init_parse_one(int ac, char **av, t_pars pars, t_config config);
 char		**ft_create_map(t_config config, char *str, int map_line);

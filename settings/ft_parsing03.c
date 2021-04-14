@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parsing02.c                                     :+:      :+:    :+:   */
+/*   ft_parsing03.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 20:58:03 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/13 21:24:37 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 17:37:45 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	check_ris(char **array, t_config *config)
+int	check_ris(t_config *config)
 {
 	int				x;
 	int				y;
@@ -52,11 +52,11 @@ int	parse_line(char **array, t_config *config)
 	if (*config->array == NULL)
 		return (0);
 	if (config->array[0][0] == 'R' && array[0][1] == 0)
-		check_ris(array, config);
+		check_ris(config);
 	else if (config->array[0][0] == 'F' && array[0][1] == 0)
-		check_floor(array, config);
+		check_floor(config);
 	else if (config->array[0][0] == 'C' && array[0][1] == 0)
-		check_cielo(array, config);
+		check_cielo(config);
 	else if (config->array[0][0] == 'N' && config->array[0][1] == 'O')
 		check_texture(array, config);
 	else if (config->array[0][0] == 'S' && config->array[0][1] == 'O')

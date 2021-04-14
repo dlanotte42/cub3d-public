@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:53:45 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 14:23:34 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/14 17:36:47 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	config_init(t_config *config)
 	config->n_wall = "../textures/mariowall1.xpm";
 }
 
-void	check_floor(char **array, t_config *config)
+void	check_floor(t_config *config)
 {
 	int				r;
 	int				g;
@@ -79,7 +79,7 @@ void	check_floor(char **array, t_config *config)
 	free(array2);
 }
 
-void	check_cielo(char **array, t_config *config)
+void	check_cielo(t_config *config)
 {
 	int				r;
 	int				g;

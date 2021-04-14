@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:53:45 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 17:11:25 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/14 17:36:22 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_check_maps(char *maps)
 	counter = 0;
 	if (maps)
 	{
-		while (i < ft_strlen(maps))
+		while (i < (int)ft_strlen(maps))
 		{
 			if (ft_custom_isdigit(maps[i]))
 				counter++;

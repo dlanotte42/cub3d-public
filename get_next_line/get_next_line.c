@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:14:12 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 14:54:46 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/14 17:35:17 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ char	*ft_get_line(char *str)
 	return (result);
 }
 
-static char	*support_get(int fd, char **line, char *buff)
+static char	*support_get(int fd, char **line)
 {
+	char	*buff;
+
 	if (fd < 0 || !line)
 		return (NULL);
 	buff = malloc(sizeof(char) * (32 + 1));
@@ -79,7 +81,7 @@ int	get_next_line(int fd, char **line)
 	static char		*save_c;
 	int				reader;
 
-	buff = support_get(fd, line, buff);
+	buff = support_get(fd, line);
 	if (!buff)
 		return (-1);
 	reader = 1;
