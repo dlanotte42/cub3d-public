@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:02 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/13 22:42:32 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 16:03:17 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	ft_support_set_params(t_game *game)
 {
-	game->player.pos_x = 2;
-	game->player.pos_y = 10;
+	game->player.pos_x = 3;
+	game->player.pos_y = 4.5;
 	game->player.dir_x = -1.0;
 	game->player.dir_y = 0.0;
 	game->player.plane_x = 0;

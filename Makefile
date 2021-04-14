@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+         #
+#    By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:19:58 by dlanotte          #+#    #+#              #
-#    Updated: 2021/04/13 22:38:17 by zxcvbinz         ###   ########.fr        #
+#    Updated: 2021/04/14 15:10:23 by dlanotte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,12 @@ NAME = cub3D
 ENGINE = engine/
 SETTINGS = settings/
 MOVEMENT = movement/
+SCREENSHOT = screenshot/
 GNL =	get_next_line/
 CC = gcc
 LIB = libmlx.dylib
 #CFLAGS = -Wall -Wextra -Werror
-SRCS = ${wildcard *.c} $(wildcard $(ENGINE)*.c) $(wildcard $(GNL)*.c) $(wildcard $(MOVEMENT)*.c) $(wildcard $(SETTINGS)*.c)
+SRCS = ${wildcard *.c} $(wildcard $(ENGINE)*.c) $(wildcard $(GNL)*.c) $(wildcard $(MOVEMENT)*.c) $(wildcard $(SETTINGS)*.c) $(wildcard $(SCREENSHOT)*.c)
 OBJS =  $(SRCS:.c=.o)
 %.o: %.c
 	@ $(CC) $(CFLAGS) -Imlx -c $< -o $@
@@ -31,7 +32,7 @@ $(NAME): $(OBJS)
 	@ echo "Building the project..."
 	@ make -s -C mlx
 	@ mv mlx/${LIB} .
-	@ echo "$(CC) -Lmlx  ${LIB} -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)"
+	@ $(CC) -Lmlx  ${LIB} -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)
 	@ echo  "\nBuilding" ${GREEN} "[OK]"
 	@ make clean
 	@ echo ${COLOR_OFF} "\nDeleted *.o files" ${GREEN} "[OK]\n" 

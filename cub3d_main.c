@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 16:43:37 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/03 18:57:13 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/14 16:04:34 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void		ft_init_texture(t_game *game)
 int		render_game_loop(t_game *game)
 {
 	ft_raycasting(game);
+	screenshot(game);
 	ft_re_create_img(game);
 	mlx_mouse_hide();
 	return (0);

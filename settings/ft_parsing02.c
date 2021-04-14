@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parsing01.c                                     :+:      :+:    :+:   */
+/*   ft_parsing02.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:53:45 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/13 21:19:14 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 14:23:34 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 
 	i = 0;
 	while ((((unsigned char *)s1)[i] == ((unsigned char *)s2)[i])
-			&& (s1[i] != '\0') && (s2[i] != '\0'))
+		&& (s1[i] != '\0') && (s2[i] != '\0'))
 		i++;
 	if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])
 		return ((int)(((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]));

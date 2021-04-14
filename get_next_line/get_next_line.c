@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:14:12 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/13 22:21:05 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 14:54:46 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,30 @@ char	*ft_get_line(char *str)
 	return (result);
 }
 
-int		get_next_line(int fd, char **line)
+static char	*support_get(int fd, char **line, char *buff)
+{
+	if (fd < 0 || !line)
+		return (NULL);
+	buff = malloc(sizeof(char) * (32 + 1));
+	if (!buff)
+		return (NULL);
+	return (buff);
+}
+
+int	get_next_line(int fd, char **line)
 {
 	char			*buff;
 	static char		*save_c;
 	int				reader;
-	int				buffer;
 
-	buffer = 32;
+	buff = support_get(fd, line, buff);
+	if (!buff)
+		return (-1);
 	reader = 1;
-	if (fd < 0 || !line || buffer <= 0)
-		return (-1);
-	if (!(buff = malloc(sizeof(char) * (buffer + 1))))
-		return (-1);
 	while (!ft_return(save_c) && reader != 0)
 	{
-		if ((reader = read(fd, buff, buffer)) == -1)
+		reader = read(fd, buff, 32);
+		if (reader == -1)
 		{
 			free(buff);
 			return (-1);
