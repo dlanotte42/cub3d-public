@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:43:47 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/15 00:41:09 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/15 00:53:45 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,6 @@ static void	ft_init_texture(t_game *game)
 			(game->textures[i].texture, &game->textures[i].bits_per_pixel, \
 			&game->textures[i].line_length, &game->textures[i].endian);
 		i++;
-	}
-}
-
-static	void	ft_print_w_a_t(t_game *game, int drawStart, int drawEnd, int lineHeight, int texX)
-{
-	int				texY;
-	double			step;
-	double			texPos;
-	unsigned int	color;
-
-	step = 1.0 * game->textures[game->raycasting.textNum].height / lineHeight;
-	texPos = (drawStart - game->camera.ris_y / 2 + lineHeight / 2) * step;
-	game->raycasting.y = drawStart;
-	while (game->raycasting.y < drawEnd)
-	{
-		texY = (int)texPos \
-			& (game->textures[game->raycasting.textNum].height - 1);
-		texPos += step;
-		color = ft_get_pixel(&game->textures[game->raycasting.textNum], \
-			texX, texY);
-		ft_put_pixel_base(&game->img, game->raycasting.x, \
-			game->raycasting.y, color);
-		game->raycasting.y++;
 	}
 }
 
@@ -116,8 +93,6 @@ static void	ft_floor_casting(t_game *game, int y)
 
 void	ft_raycasting(t_game *game)
 {
-	double wallX;
-	int texX; 
 	int numSprites;
 	double *ZBuffer;
 	int *spriteOrder;
@@ -138,35 +113,7 @@ void	ft_raycasting(t_game *game)
     }
 	game->raycasting.x = 0;
 	ft_init_texture(game);
-	while(game->raycasting.x < game->camera.ris_x)
-	{
-		game = ft_raycast_zero(game, game->map);
-		if (game->mods.Wall_rotate)
-		{
-			if(game->raycasting.side == 0) 
-				wallX = game->player.pos_x + game->raycasting.perpWallDist * game->raycasting.rayDirY; 
-			else          					
-				wallX = game->player.pos_x + game->raycasting.perpWallDist * game->raycasting.rayDirX; 
-		}
-		else
-		{
-			if(game->raycasting.side == 0) 
-				wallX = game->player.pos_y + game->raycasting.perpWallDist * game->raycasting.rayDirY;
-			else          					
-				wallX = game->player.pos_x + game->raycasting.perpWallDist * game->raycasting.rayDirX;
-		}
-		wallX -= floor((wallX));
-		texX = (int)(wallX * (double)(game->textures[game->raycasting.textNum].width));
-		if(game->raycasting.side == 0 && game->raycasting.rayDirX > 0) 
-			texX = game->textures[game->raycasting.textNum].width - texX - 1;
-		if(game->raycasting.side == 1 && game->raycasting.rayDirY < 0) 
-			texX = game->textures[game->raycasting.textNum].width - texX - 1;
-		ft_print_w_a_t(game, game->raycasting.Addvalues.drawStart, 
-			game->raycasting.Addvalues.drawEnd, game->raycasting.Addvalues.lineheight, texX);
-		ft_move(game, game->map);
-		ZBuffer[game->raycasting.x] = game->raycasting.perpWallDist;
-		game->raycasting.x++;
-	}
+	ZBuffer = ft_raycasting_extra(game, ZBuffer);
 	i = 0;
 	while(i < numSprites)
     {
@@ -179,4 +126,7 @@ void	ft_raycasting(t_game *game)
     sortSprites(spriteOrder, spriteDistance, numSprites);
 	ft_sprite_create(game, numSprites, ZBuffer, spriteOrder);
 	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->img.img, 0, 0);
+	free(ZBuffer);
+	free(spriteOrder);
+	free(spriteDistance);
 }

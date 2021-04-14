@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 23:50:03 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/15 00:55:49 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,13 @@
 # define S_KEY 1
 # define D_KEY 2
 # define W_KEY 13
-
 # define UP_KEY 126
 # define DOWN_KEY 125
 # define RIGHT_KEY 124
 # define LEFT_KEY 123
 # define RUN_KEY 257
-
 # define DRUNK_KEY 32
 # define TAP_KEY 17
-
 # define TRUE 1
 # define FALSE 0
 

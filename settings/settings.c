@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:02 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/14 23:52:04 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/15 00:56:13 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	ft_support_set_params(t_game *game, t_config config)
 	game->player.pos_y = config.start_y;
 	ft_set_direction(game, config.direction);
 	game->player.rotation_speed = 0.000080;
-	game->player.speed = 0.000090;
+	game->player.speed = 0.000180;
 	game->mods.Drunk = FALSE;
 	game->mods.Wall_rotate = FALSE;
 	game->movement.up = FALSE;
