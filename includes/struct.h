@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/15 00:55:49 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/15 01:05:14 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,16 @@ typedef struct s_ray_value
 	int				lineheight;
 }				t_ray_value;
 
+typedef struct s_sprite_cast 
+{
+	int				numSprites;
+	double			*ZBuffer;
+	int				*spriteOrder;
+	double			*spriteDistance;
+	int				y;
+	int				i;
+}				t_sprite_cast;
+
 typedef struct s_raycasting {
 	int				y;
 	int				x;
@@ -143,6 +153,7 @@ typedef struct s_raycasting {
 	double			oldPlaneX;
 	t_ray_value		Addvalues;
 	t_floor			floor;
+	t_sprite_cast	sprite_casting;
 }				t_raycasting;
 
 typedef struct s_game{

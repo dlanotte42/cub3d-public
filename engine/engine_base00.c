@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:43:47 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/15 00:53:45 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/15 01:09:51 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,42 +91,52 @@ static void	ft_floor_casting(t_game *game, int y)
 	ft_print_floor(game, y);
 }
 
-void	ft_raycasting(t_game *game)
+void	ft_route_casting(t_game *game)
 {
-	int numSprites;
-	double *ZBuffer;
-	int *spriteOrder;
-	double *spriteDistance;
-	int y;
-	int	i;
+	int i;
 
-	ZBuffer = malloc(sizeof(double) * game->camera.ris_x);
-	numSprites = game->sprites_counter;
-	spriteOrder = malloc(sizeof(int) * numSprites);
-	spriteDistance = malloc(sizeof(double) * numSprites);
-	ft_init_texture(game);
-	y = game->camera.ris_y / 2 + 1;
-    while( y < game->camera.ris_y)
+	while( game->raycasting.sprite_casting.y < game->camera.ris_y)
     {
-		ft_floor_casting(game, y);
-		y++;
+		ft_floor_casting(game, game->raycasting.sprite_casting.y);
+		game->raycasting.sprite_casting.y++;
     }
 	game->raycasting.x = 0;
 	ft_init_texture(game);
-	ZBuffer = ft_raycasting_extra(game, ZBuffer);
+	game->raycasting.sprite_casting.ZBuffer = \
+		ft_raycasting_extra(game, game->raycasting.sprite_casting.ZBuffer);
 	i = 0;
-	while(i < numSprites)
+	while(i < game->raycasting.sprite_casting.numSprites)
     {
-      	spriteOrder[i] = i;
-      	spriteDistance[i] = ((game->player.pos_x - game->sprites[i].x) \
-		  * (game->player.pos_x - game->sprites[i].x) + (game->player.pos_y \
-		  - game->sprites[i].y) * (game->player.pos_y - game->sprites[i].y));
+      	game->raycasting.sprite_casting.spriteOrder[i] = i;
+      	game->raycasting.sprite_casting.spriteDistance[i] = ((game->player.pos_x \
+			 - game->sprites[i].x) \
+			 * (game->player.pos_x - game->sprites[i].x) + (game->player.pos_y \
+			 - game->sprites[i].y) * (game->player.pos_y - game->sprites[i].y));
 		i++;
 	}
-    sortSprites(spriteOrder, spriteDistance, numSprites);
-	ft_sprite_create(game, numSprites, ZBuffer, spriteOrder);
-	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->img.img, 0, 0);
-	free(ZBuffer);
-	free(spriteOrder);
-	free(spriteDistance);
+    sortSprites(game->raycasting.sprite_casting.spriteOrder, \
+		game->raycasting.sprite_casting.spriteDistance, \
+		game->raycasting.sprite_casting.numSprites);
+	ft_sprite_create(game, game->raycasting.sprite_casting.numSprites, \
+	 	game->raycasting.sprite_casting.ZBuffer, \
+		game->raycasting.sprite_casting.spriteOrder);
+}
+
+void	ft_raycasting(t_game *game)
+{
+	game->raycasting.sprite_casting.ZBuffer = malloc(sizeof(double) \
+		 * game->camera.ris_x);
+	game->raycasting.sprite_casting.numSprites = game->sprites_counter;
+	game->raycasting.sprite_casting.spriteOrder = malloc(sizeof(int) \
+		 * game->sprites_counter);
+	game->raycasting.sprite_casting.spriteDistance = malloc(sizeof(double) \
+		* game->sprites_counter);
+	ft_init_texture(game);
+	game->raycasting.sprite_casting.y = game->camera.ris_y / 2 + 1;
+   	ft_route_casting(game);
+	mlx_put_image_to_window(game->vars.mlx, game->vars.win, \
+		game->img.img, 0, 0);
+	free(game->raycasting.sprite_casting.ZBuffer);
+	free(game->raycasting.sprite_casting.spriteOrder);
+	free(game->raycasting.sprite_casting.spriteDistance);
 }
