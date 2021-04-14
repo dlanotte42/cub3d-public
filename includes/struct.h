@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/13 22:04:20 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 17:20:33 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_camera
 {
 	int				ris_x;
 	int				ris_y;
-	int				destroy;
+	int				screenshot_game;
 }				t_camera;
 
 typedef struct s_sprite
@@ -189,6 +189,7 @@ typedef struct s_config {
 	int				**map_def;
 	char			**array;
 	int				map_line;
+	int				screenshot;
 }				t_config;
 
 #endif

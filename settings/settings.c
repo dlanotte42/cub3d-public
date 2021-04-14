@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:02 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/14 16:03:17 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/14 17:21:49 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	ft_support_set_params(t_game *game)
 	game->player.plane_y = 0.66;
 	game->player.rotation_speed = 0.000080;
 	game->player.speed = 0.000090;
-	game->camera.destroy = FALSE;
 	game->mods.Drunk = FALSE;
 	game->mods.Wall_rotate = FALSE;
 	game->movement.up = FALSE;
@@ -39,6 +38,7 @@ void	ft_set_parameters(t_game *game, int argc, char **argv)
 
 	config = ft_parsing(argc, argv);
 	ft_support_set_params(game);
+	game->camera.screenshot_game = config.screenshot;
 	game->map = config.map_def;
 	game->textures[0].texture_path = config.n_wall;
 	game->textures[1].texture_path = config.s_wall;

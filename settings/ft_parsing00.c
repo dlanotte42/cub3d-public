@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 17:49:05 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 15:58:21 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/14 17:11:16 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ t_config	ft_init_parse_one(int ac, char **av, t_pars pars, t_config config)
 
 	if (ac == 3 && ft_strcmp(av[2], "--save") == 0)
 	{
-		write(1, "screenshot\n", 11);
-		pars.x = 2;
-	}				
+		printf("screenshot saved to /screenshot/screenshot.bmp\n");
+		config.screenshot = TRUE;
+	}
 	if (!ft_check_file(av[pars.x]))
 	{
 		write(1, "the selected file is not correct.\n", 37);

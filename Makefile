@@ -6,7 +6,7 @@
 #    By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:19:58 by dlanotte          #+#    #+#              #
-#    Updated: 2021/04/14 15:10:23 by dlanotte         ###   ########.fr        #
+#    Updated: 2021/04/14 17:23:48 by dlanotte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $(NAME): $(OBJS)
 	@ echo  "\nBuilding" ${GREEN} "[OK]"
 	@ make clean
 	@ echo ${COLOR_OFF} "\nDeleted *.o files" ${GREEN} "[OK]\n" 
-	@ ./cub3D maps/map.cub
+	@ ./cub3D maps/map.cub 
 debug: 
 	@ echo "Building the debug project..."
 	@ make -s -C mlx

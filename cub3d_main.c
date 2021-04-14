@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 16:43:37 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 16:04:34 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/14 17:22:24 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static void		ft_init_texture(t_game *game)
 int		render_game_loop(t_game *game)
 {
 	ft_raycasting(game);
-	screenshot(game);
+	if (game->camera.screenshot_game)
+		screenshot(game);
 	ft_re_create_img(game);
 	mlx_mouse_hide();
 	return (0);
@@ -52,6 +53,6 @@ int		main(int argc, char **argv)
 	game.img.img = mlx_new_image(game.vars.mlx, game.camera.ris_x, game.camera.ris_y);
 	game.img.addr = mlx_get_data_addr(game.img.img, &game.img.bits_per_pixel, &game.img.line_length, &game.img.endian);
 	mlx_loop_hook(game.vars.mlx, render_game_loop, &game);
-	mlx_loop(game.vars.mlx);
+	mlx_loop(game.vars.mlx); 
 	return (0);
 }

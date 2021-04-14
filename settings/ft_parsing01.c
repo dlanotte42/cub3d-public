@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parsing00.c                                     :+:      :+:    :+:   */
+/*   ft_parsing01.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:53:45 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/13 21:20:08 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 17:11:25 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_config	ft_parsing(int ac, char **av)
 
 	pars.x = 1;
 	config.map_line = 0;
+	config.screenshot = FALSE;
 	if (ac == 2 || ac == 3)
 	{
 		config = ft_init_parse_one(ac, av, pars, config);
