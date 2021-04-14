@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:56:09 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 15:25:40 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/14 21:05:47 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			ft_re_create_img(t_game *game);
 void			ft_raycasting(t_game *game);
 t_game			*ft_raycast_zero(t_game *game, int **map);
 unsigned int	ft_get_pixel(t_textures *data, int x, int y);
-void    		screenshot(t_game *s);
+void			screenshot(t_game *s);
 unsigned int	ft_get_pixel_camera(t_data *data, int x, int y);
 
 #endif

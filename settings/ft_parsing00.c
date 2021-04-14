@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing00.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 17:49:05 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 17:11:16 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/14 21:45:51 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,24 @@ t_config	ft_init_parse_one(int ac, char **av, t_pars pars, t_config config)
 	return (config);
 }
 
-static t_config	ft_support_convert(t_config config, int j, int i, int len)
+static t_config	*ft_support_convert(t_config *config, int j, int i, int len)
 {
 	while (j < len)
 	{
-		if (config.map[i][j] == ' ')
-			config.map_def[i][j] = 1;
-		else if (config.map[i][j] == 'N' || config.map[i][j] == 'S'
-			|| config.map[i][j] == 'W' || config.map[i][j] == 'E')
-			config.map_def[i][j] = 0;
+		config = ft_set_player_start(config->map[i][j], config, i, j);
+		if (config->map[i][j] == ' ')
+			config->map_def[i][j] = 1;
+		else if (config->map[i][j] == 'N' || config->map[i][j] == 'S'
+			|| config->map[i][j] == 'W' || config->map[i][j] == 'E')
+			config->map_def[i][j] = 0;
 		else
-			config.map_def[i][j] = (config.map[i][j] - 48);
+			config->map_def[i][j] = (config->map[i][j] - 48);
 		j++;
 	}
 	return (config);
 }
 
-int	**ft_convert(t_config config)
+int	**ft_convert(t_config *config)
 {
 	int		i;
 	int		len;
@@ -81,16 +82,16 @@ int	**ft_convert(t_config config)
 	j = 0;
 	i = 0;
 	len = 0;
-	config.map_def = ft_calloc(config.map_line, sizeof(int *));
-	while (i < config.map_line)
+	config->map_def = ft_calloc(config->map_line, sizeof(int *));
+	while (i < config->map_line)
 	{
-		len = ft_strlen(config.map[i]);
-		config.map_def[i] = ft_calloc(len, sizeof(int));
+		len = ft_strlen(config->map[i]);
+		config->map_def[i] = ft_calloc(len, sizeof(int));
 		config = ft_support_convert(config, j, i, len);
 		j = 0;
 		i++;
 	}
-	return (config.map_def);
+	return (config->map_def);
 }
 
 char	*ft_strcpy_custom(char *src)

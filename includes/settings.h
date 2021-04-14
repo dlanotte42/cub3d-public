@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:58 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/14 17:36:46 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/14 21:45:14 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_config	ft_parsing(int ac, char **av);
 void		*ft_calloc(size_t count, size_t size);
 char		*ft_strcpy(char *src);
 char		*ft_strdup(const char *src);
-int			**ft_convert(t_config config);
+int			**ft_convert(t_config *config);
 void		sortSprites(int *order, double *dist, int amount);
 int			ft_strcmp(const char *s1, const char *s2);
 void		config_init(t_config *config);
@@ -36,5 +36,7 @@ t_config	ft_init_parse_one(int ac, char **av, t_pars pars, t_config config);
 char		**ft_create_map(t_config config, char *str, int map_line);
 int			ft_check_maps(char *maps);
 char		*ft_strcpy_custom(char *src);
+t_config	*ft_set_player_start(int map_position, t_config \
+				*config, int x, int y);
 
 #endif

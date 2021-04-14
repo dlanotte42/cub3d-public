@@ -3,39 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   settings.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:02 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/14 20:27:15 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/14 22:01:40 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static void	ft_support_set_params(t_game *game)
+static void	ft_support_set_change_direction(t_game *game, char direction)
 {
-	game->player.pos_x = 4;
-	game->player.pos_y = 4.5;
-	/* game->player.dir_x = 1;
-	game->player.dir_y = 0.0;   N
-	game->player.plane_x = 0;
-	game->player.plane_y = -0.66; */
+	if (direction == 'W')
+	{
+		game->player.dir_x = 0;
+		game->player.dir_y = 1;
+		game->player.plane_x = 0.66;
+		game->player.plane_y = 0;
+	}
+	else if (direction == 'E')
+	{
+		game->player.dir_x = 0;
+		game->player.dir_y = -1;
+		game->player.plane_x = -0.66;
+		game->player.plane_y = 0;
+	}
+}
 
-	/* game->player.dir_x = -1;
-	game->player.dir_y = 0.0;   S
-	game->player.plane_x = 0;
-	game->player.plane_y = 0.66; */
+static void	ft_set_direction(t_game *game, char direction)
+{
+	if (direction == 'N')
+	{
+		game->player.dir_x = 1;
+		game->player.dir_y = 0.0;
+		game->player.plane_x = 0;
+		game->player.plane_y = -0.66;
+	}
+	else if (direction == 'S')
+	{
+		game->player.dir_x = -1;
+		game->player.dir_y = 0.0;
+		game->player.plane_x = 0;
+		game->player.plane_y = 0.66;
+	}
+	else if (direction == 'W' || direction == 'E')
+		ft_support_set_change_direction(game, direction);
+}
 
-	/* game->player.dir_x = 0;
-	game->player.dir_y = -1;   E
-	game->player.plane_x = -0.66;
-	game->player.plane_y = 0;  */
-	
-	game->player.dir_x = 0;
-	game->player.dir_y = 1;   //W
-	game->player.plane_x = 0.66;
-	game->player.plane_y = 0; 
-	
+static void	ft_support_set_params(t_game *game, t_config config)
+{
+	game->player.pos_x = config.start_x;
+	game->player.pos_y = config.start_y;
+	ft_set_direction(game, config.direction);
 	game->player.rotation_speed = 0.000080;
 	game->player.speed = 0.000090;
 	game->mods.Drunk = FALSE;
@@ -53,7 +72,7 @@ void	ft_set_parameters(t_game *game, int argc, char **argv)
 	t_config	config;
 
 	config = ft_parsing(argc, argv);
-	ft_support_set_params(game);
+	ft_support_set_params(game, config);
 	game->camera.screenshot_game = config.screenshot;
 	game->map = config.map_def;
 	game->textures[0].texture_path = config.n_wall;
