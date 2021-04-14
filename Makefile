@@ -6,7 +6,7 @@
 #    By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:19:58 by dlanotte          #+#    #+#              #
-#    Updated: 2021/04/14 17:29:30 by dlanotte         ###   ########.fr        #
+#    Updated: 2021/04/14 19:14:48 by dlanotte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ debug:
 	@ echo "Building the debug project..."
 	@ make -s -C mlx
 	@ mv mlx/${LIB} .
-	@ $(CC) -g -Lmlx  ${LIB} -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)
+	@ $(CC) -g -Lmlx ${LIB} -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)
 clean:
 	@ rm -f ${OBJS}
 	@ make clean -C mlx 

@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:02 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/14 17:21:49 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/14 20:27:15 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,28 @@
 
 static void	ft_support_set_params(t_game *game)
 {
-	game->player.pos_x = 3;
+	game->player.pos_x = 4;
 	game->player.pos_y = 4.5;
-	game->player.dir_x = -1.0;
-	game->player.dir_y = 0.0;
+	/* game->player.dir_x = 1;
+	game->player.dir_y = 0.0;   N
 	game->player.plane_x = 0;
-	game->player.plane_y = 0.66;
+	game->player.plane_y = -0.66; */
+
+	/* game->player.dir_x = -1;
+	game->player.dir_y = 0.0;   S
+	game->player.plane_x = 0;
+	game->player.plane_y = 0.66; */
+
+	/* game->player.dir_x = 0;
+	game->player.dir_y = -1;   E
+	game->player.plane_x = -0.66;
+	game->player.plane_y = 0;  */
+	
+	game->player.dir_x = 0;
+	game->player.dir_y = 1;   //W
+	game->player.plane_x = 0.66;
+	game->player.plane_y = 0; 
+	
 	game->player.rotation_speed = 0.000080;
 	game->player.speed = 0.000090;
 	game->mods.Drunk = FALSE;
