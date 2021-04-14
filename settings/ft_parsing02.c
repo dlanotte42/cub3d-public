@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing02.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:53:45 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 17:36:47 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/14 22:28:16 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,10 @@ int 	ft_check_file(char *file)
 {
 	while (*file)
 	{
-		if (*file == '.')
-		{
-			file++;
-			if (*file == 'c')
-			{
-				file++;
-				if (*file == 'u')
-				{
-					file++;
-					if (*file == 'b')
-					{
-						file++;
-						if (*file == 0)
-							return (1);
-					}
-				}
-			}
-		}
+		if (*file == '.' && *(file + 1) == 'c' && \
+			*(file + 2) == 'u' && *(file + 3) == 'b' && \
+			*(file + 4) == '\0')
+			return (1);
 		file++;
 	}
 	return (0);

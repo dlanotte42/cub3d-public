@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:02 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/14 22:01:40 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 22:19:55 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	ft_set_parameters(t_game *game, int argc, char **argv)
 
 	config = ft_parsing(argc, argv);
 	ft_support_set_params(game, config);
+	game->start = config.start_game;
 	game->camera.screenshot_game = config.screenshot;
 	game->map = config.map_def;
 	game->textures[0].texture_path = config.n_wall;

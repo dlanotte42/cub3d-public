@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:58 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/14 21:45:14 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 22:28:10 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_config	ft_init_parse_one(int ac, char **av, t_pars pars, t_config config);
 char		**ft_create_map(t_config config, char *str, int map_line);
 int			ft_check_maps(char *maps);
 char		*ft_strcpy_custom(char *src);
-t_config	*ft_set_player_start(int map_position, t_config \
+t_config	*ft_s_pla_start(int map_position, t_config \
 				*config, int x, int y);
 
 #endif

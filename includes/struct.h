@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 21:48:15 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 22:19:35 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ typedef struct s_game{
 	int				**map;
 	t_sprite		sprites[16];
 	int				sprites_counter;
+	int				start;
 }				t_game;
 
 typedef struct s_pars
@@ -193,6 +194,7 @@ typedef struct s_config {
 	int				start_x;
 	int				start_y;
 	char			direction;
+	int				start_game;
 }				t_config;
 
 #endif

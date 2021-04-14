@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 16:43:37 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 19:25:49 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/14 22:18:02 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,15 @@ int		main(int argc, char **argv)
 	t_game game;
 
 	ft_set_parameters(&game, argc, argv);
-	ft_init_mlx(&game);
-	mlx_hook(game.vars.win, 2, 0L, onPressButton, &game);
-	mlx_hook(game.vars.win, 3, 0L, onReleseButton, &game);	
-	game.img.img = mlx_new_image(game.vars.mlx, game.camera.ris_x, game.camera.ris_y);
-	game.img.addr = mlx_get_data_addr(game.img.img, &game.img.bits_per_pixel, &game.img.line_length, &game.img.endian);
-	mlx_loop_hook(game.vars.mlx, render_game_loop, &game);
-	mlx_loop(game.vars.mlx); 
+	if (game.start == TRUE)
+	{
+		ft_init_mlx(&game);
+		mlx_hook(game.vars.win, 2, 0L, onPressButton, &game);
+		mlx_hook(game.vars.win, 3, 0L, onReleseButton, &game);	
+		game.img.img = mlx_new_image(game.vars.mlx, game.camera.ris_x, game.camera.ris_y);
+		game.img.addr = mlx_get_data_addr(game.img.img, &game.img.bits_per_pixel, &game.img.line_length, &game.img.endian);
+		mlx_loop_hook(game.vars.mlx, render_game_loop, &game);
+		mlx_loop(game.vars.mlx); 
+	}
 	return (0);
 }

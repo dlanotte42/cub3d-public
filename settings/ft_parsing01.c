@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:53:45 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 21:44:03 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 22:28:17 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_config	ft_parsing(int ac, char **av)
 
 	pars.x = 1;
 	config.map_line = 0;
+	config.start_game = FALSE;
 	config.screenshot = FALSE;
 	config.start_x = 0;
 	config.start_y = 0;
@@ -91,6 +92,8 @@ t_config	ft_parsing(int ac, char **av)
 	{
 		config = ft_init_parse_one(ac, av, pars, config);
 		config.map_def = ft_convert(&config);
+		if (config.map_line)
+			config.start_game = TRUE;
 		return (config);
 	}
 	else
