@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine_raycast.c                                   :+:      :+:    :+:   */
+/*   engine_base01.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 00:12:59 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/14 17:31:43 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/14 23:33:06 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,6 @@ static t_game	*ft_int_raycastone(t_game *game, int **map)
 	}
 	if (map[game->raycasting.mapX][game->raycasting.mapY] == 1)
 		game->raycasting.hit = 1;
-	else if (map[game->raycasting.mapX][game->raycasting.mapY] == 2)
-	{
-		game->sprites[game->sprites_counter].x = game->raycasting.mapX + 0.5;
-		game->sprites[game->sprites_counter].y = game->raycasting.mapY + 0.5;
-		game->sprites[game->sprites_counter].texture = 5;
-		game->sprites_counter++;
-	}
 	return (game);
 }
 

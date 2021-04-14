@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 17:49:05 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 22:28:25 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 23:45:40 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ static t_config	*ft_support_convert(t_config *config, int j, int i, int len)
 		config = ft_s_pla_start(config->map[i][j], config, i, j);
 		if (config->map[i][j] == ' ')
 			config->map_def[i][j] = 1;
+		else if (config->map[i][j] == '2')
+			config->number_sprite++;
 		else if (config->map[i][j] == 'N' || config->map[i][j] == 'S'
 			|| config->map[i][j] == 'W' || config->map[i][j] == 'E')
 			config->map_def[i][j] = 0;
@@ -82,6 +84,7 @@ int	**ft_convert(t_config *config)
 	j = 0;
 	i = 0;
 	len = 0;
+	config->number_sprite = 0;
 	config->map_def = ft_calloc(config->map_line, sizeof(int *));
 	while (i < config->map_line)
 	{

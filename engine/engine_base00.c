@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine_base.c                                      :+:      :+:    :+:   */
+/*   engine_base00.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:43:47 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/13 22:40:39 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 23:54:49 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,12 @@ void	ft_raycasting(t_game *game)
 {
 	double wallX;
 	int texX; 
-	int numSprites = 16;
+	int numSprites = game->sprites_counter;
 	double ZBuffer[game->camera.ris_x];
 	int spriteOrder[numSprites];
-	double spriteDistance[numSprites];	
-	game->sprites_counter = 0;
+	double spriteDistance[numSprites];
+
+	printf("%d",numSprites);
 
 	ft_init_texture(game);
     for(int y = game->camera.ris_y / 2 + 1; y < game->camera.ris_y; ++y)

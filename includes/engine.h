@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:56:09 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 21:05:47 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 23:29:58 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ t_game			*ft_raycast_zero(t_game *game, int **map);
 unsigned int	ft_get_pixel(t_textures *data, int x, int y);
 void			screenshot(t_game *s);
 unsigned int	ft_get_pixel_camera(t_data *data, int x, int y);
+void			ft_check_texture(t_game *game, t_config *config);
 
 #endif

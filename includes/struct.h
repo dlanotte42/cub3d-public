@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 22:19:35 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 23:50:03 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ typedef struct s_game{
 	t_mod			mods;
 	t_raycasting	raycasting;
 	int				**map;
-	t_sprite		sprites[16];
+	t_sprite		*sprites;
 	int				sprites_counter;
 	int				start;
 }				t_game;
@@ -195,6 +195,7 @@ typedef struct s_config {
 	int				start_y;
 	char			direction;
 	int				start_game;
+	int				number_sprite;
 }				t_config;
 
 #endif

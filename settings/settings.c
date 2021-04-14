@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:02 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/14 22:19:55 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/14 23:52:04 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	ft_set_parameters(t_game *game, int argc, char **argv)
 	game->textures[5].texture_path = config.sprite_tex;
 	game->camera.ris_x = config.ris_x;
 	game->camera.ris_y = config.ris_y;
+	game->sprites = malloc(config.number_sprite * sizeof(t_sprite));
+	ft_check_texture(game, &config);
 }
 
 t_game	*ft_raycast_set_block(t_game *game)
