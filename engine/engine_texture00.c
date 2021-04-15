@@ -6,11 +6,28 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 23:03:12 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/14 23:53:01 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/15 01:17:45 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	ft_init_texture(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < 6)
+	{
+		game->textures[i].texture = mlx_xpm_file_to_image(game->vars.mlx, \
+			game->textures[i].texture_path, &game->textures[i].width, \
+			&game->textures[i].height);
+		game->textures[i].texture_addr = mlx_get_data_addr \
+			(game->textures[i].texture, &game->textures[i].bits_per_pixel, \
+			&game->textures[i].line_length, &game->textures[i].endian);
+		i++;
+	}
+}
 
 void	ft_check_texture(t_game *game, t_config *config)
 {

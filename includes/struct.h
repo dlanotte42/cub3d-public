@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/15 01:05:14 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/15 02:15:30 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ typedef struct s_ray_value
 	int				lineheight;
 }				t_ray_value;
 
-typedef struct s_sprite_cast 
+typedef struct s_sprite_cast
 {
 	int				numSprites;
 	double			*ZBuffer;
@@ -130,6 +130,37 @@ typedef struct s_sprite_cast
 	int				y;
 	int				i;
 }				t_sprite_cast;
+
+typedef struct s_spri_create
+{
+	int				i;
+	int				stripe;
+	double			spriteX;
+	double			spriteY;
+	double			invDet;
+	double			transformX;
+	double			transformY;
+	int				color;
+	int				y;
+	int				spriteScreenX;
+	int				spriteHeight;
+	int				drawStartY;
+	int				drawEndY;
+	int				spriteWidth;
+	int				drawStartX;
+	int				drawEndX;
+	int				texX;
+	int				d;
+	int				texY;
+}				t_spri_create;
+
+typedef struct s_wall_cast
+{
+	int				texY;
+	double			step;
+	double			texPos;
+	unsigned int	color;
+}				t_wall_cast;
 
 typedef struct s_raycasting {
 	int				y;
@@ -154,6 +185,8 @@ typedef struct s_raycasting {
 	t_ray_value		Addvalues;
 	t_floor			floor;
 	t_sprite_cast	sprite_casting;
+	t_spri_create	sprite_create;
+	t_wall_cast		wall_cast;
 }				t_raycasting;
 
 typedef struct s_game{

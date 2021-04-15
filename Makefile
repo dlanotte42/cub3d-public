@@ -6,7 +6,7 @@
 #    By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:19:58 by dlanotte          #+#    #+#              #
-#    Updated: 2021/04/14 21:06:26 by zxcvbinz         ###   ########.fr        #
+#    Updated: 2021/04/15 02:15:58 by zxcvbinz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS = ${wildcard *.c} $(wildcard $(ENGINE)*.c) $(wildcard $(GNL)*.c) $(wildcard
 OBJS =  $(SRCS:.c=.o)
 %.o: %.c
 	@ $(CC) $(CFLAGS) -Imlx -c $< -o $@
+	
 $(NAME): $(OBJS)
 	@ echo "Building the project..."
 	@ make -s -C mlx
@@ -36,10 +37,12 @@ $(NAME): $(OBJS)
 	@ echo  "\nBuilding" ${GREEN} "[OK]"
 	@ make clean
 	@ echo ${COLOR_OFF} "\nDeleted *.o files" ${GREEN} "[OK]\n" 
-	@ ./cub3D maps/map.cub 
+	@ ./cub3D maps/map.cub
+
 clean:
 	@ rm -f ${OBJS}
 	@ make clean -C mlx 
+	
 fclean: clean
 	@ rm -f ${LIB}
 	@ rm -f $(NAME)

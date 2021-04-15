@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:56:09 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/15 00:51:38 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/15 02:10:46 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,13 @@ unsigned int	ft_get_pixel(t_textures *data, int x, int y);
 void			screenshot(t_game *s);
 unsigned int	ft_get_pixel_camera(t_data *data, int x, int y);
 void			ft_check_texture(t_game *game, t_config *config);
-void			ft_sprite_create(t_game *game, int numSprites, \
-					double *ZBuffer, int *spriteOrder);
-double			*ft_raycasting_extra(t_game *game, double *ZBuffer);
+void			ft_cs(t_game *game, int numSprites, double \
+					*ZBuffer, int *spriteOrder);
+double			*ft_raycasting_extra(t_game *game, double *ZBuffer, int texX);
+void			ft_init_texture(t_game *game);
+void			ft_print_floor(t_game *game, int y);
+void			ft_cs_one(t_game *game, int *spriteOrder);
+void			ft_cs_check(t_game *game);
+void			ft_put_sprite(t_game *game);
 
 #endif
