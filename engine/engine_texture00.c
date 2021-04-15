@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 23:03:12 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/15 01:17:45 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/15 23:58:23 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_init_texture(t_game *game)
 	int	i;
 
 	i = 0;
-	while (i < 6)
+	while (i < 7)
 	{
 		game->textures[i].texture = mlx_xpm_file_to_image(game->vars.mlx, \
 			game->textures[i].texture_path, &game->textures[i].width, \

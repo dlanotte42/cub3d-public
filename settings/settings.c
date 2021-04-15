@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:02 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/15 17:48:24 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/15 23:59:08 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	ft_set_parameters(t_game *game, int argc, char **argv)
 	game->textures[3].texture_path = config.e_wall;
 	game->textures[4].texture_path = "./texture/wood.xpm";
 	game->textures[5].texture_path = config.sprite_tex;
+	game->textures[6].texture_path = "./texture/redbrick.xpm";
 	game->camera.ris_x = config.ris_x;
 	game->camera.ris_y = config.ris_y;
 	game->sprites = malloc(config.number_sprite * sizeof(t_sprite));

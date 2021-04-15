@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+         #
+#    By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:19:58 by dlanotte          #+#    #+#              #
-#    Updated: 2021/04/15 19:11:22 by dlanotte         ###   ########.fr        #
+#    Updated: 2021/04/16 00:03:58 by zxcvbinz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,32 +27,66 @@ WHITE       = "\033[0;37m"        # White
 #-*-*-*-*--*-*- Makefile -*-*-*-*--*-*-
 
 NAME = cub3D
-ENGINE = engine/
-SETTINGS = settings/
-MOVEMENT = movement/
-SCREENSHOT = screenshot/
-GNL =	get_next_line/
+ENGINE = engine/engine_base_extra.c \
+		 engine/engine_base00.c \
+		 engine/engine_base02.c \
+		 engine/engine_base03.c \
+		 engine/engine_texture00.c
+		 
+SETTINGS = settings/ft_libft_functions00.c \
+		   settings/ft_libft_functions01.c \
+		   settings/ft_parsing00.c \
+		   settings/ft_parsing01.c \
+		   settings/ft_parsing02.c \
+		   settings/ft_parsing03.c \
+		   settings/ft_player_settings.c \
+		   settings/ft_split_files.c \
+		   settings/settings.c
+
+MOVEMENT = movement/ft_movement.c \
+		   movement/ft_button.c
+
+SCREENSHOT = screenshot/ft_bitmap.c
+
+GNL =	get_next_line/get_next_line.c \
+		get_next_line/get_next_line_utils.c
+		
 CC = gcc
 LIB = libmlx.dylib
 CFLAGS = -Wall -Wextra -Werror
-SRCS = ${wildcard *.c} $(wildcard $(ENGINE)*.c) $(wildcard $(GNL)*.c) $(wildcard $(MOVEMENT)*.c) $(wildcard $(SETTINGS)*.c) $(wildcard $(SCREENSHOT)*.c)
+SRCS = cub3d_main.c $(ENGINE) $(GNL) $(MOVEMENT) $(SETTINGS) $(SCREENSHOT)
+SRCSB = bonus/bonus_engine.c
+SRCSS = engine/engine_base01.c
 OBJS =  $(SRCS:.c=.o)
+OBJSS = $(SRCSS:.c=.o)
+OBJSB = $(SRCSB:.c=.o)
 %.o: %.c
-	@ $(CC) $(CFLAGS) -Imlx -c $< -o $@
+	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 	
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(OBJSS)
 	@ sed -n 17,26p Makefile | cut -c 2-;
 	@ echo "\nBuilding the project..."
 	@ make -s -C mlx
 	@ mv mlx/${LIB} .
-	@ $(CC) -Lmlx  ${LIB} -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)
+	@ $(CC) -Lmlx  ${LIB} -framework OpenGL -framework AppKit $(OBJS) $(OBJSS) -o $(NAME)
 	@ echo  "\nBuilding" ${GREEN} "[OK]"
 	@ make clean
 	@ echo ${COLOR_OFF} "\nDeleted *.o files" ${GREEN} "[OK]\n" 
 	@ ./cub3D maps/map.cub
+	
+bonus: $(OBJS) $(OBJSB)
+	@ sed -n 17,26p Makefile | cut -c 2-;
+	@ echo "\nBuilding the bonus project..."
+	@ make -s -C mlx
+	@ mv mlx/${LIB} .
+	@ $(CC) -Lmlx  ${LIB} -framework OpenGL -framework AppKit $(OBJS) $(OBJSB) -o $(NAME)
+	@ echo  "\nBuilding" ${GREEN} "[OK]"
+	@ make clean
+	@ echo ${COLOR_OFF} "\nDeleted *.o files" ${GREEN} "[OK]\n" 
+	@ ./cub3D maps/map_bonus.cub
 
 clean:
-	@ rm -f ${OBJS}
+	@ rm -f ${OBJS} ${OBJSB} $(OBJSS)
 	@ make clean -C mlx 
 	
 fclean: clean
@@ -61,4 +95,4 @@ fclean: clean
 
 re:	fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

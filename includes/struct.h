@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/15 02:15:30 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/15 23:58:05 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ typedef struct s_game{
 	t_movement		movement;
 	t_player		player;
 	t_camera		camera;
-	t_textures		textures[11];
+	t_textures		textures[7];
 	t_mod			mods;
 	t_raycasting	raycasting;
 	int				**map;

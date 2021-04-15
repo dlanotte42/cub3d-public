@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine_base01.c                                    :+:      :+:    :+:   */
+/*   bonus_engine.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 00:00:59 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/16 00:00:23 by zxcvbinz         ###   ########.fr       */
+/*   Created: 2021/04/15 23:34:04 by zxcvbinz          #+#    #+#             */
+/*   Updated: 2021/04/16 00:00:32 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	ft_print_floor(t_game *game, int y)
 		game->raycasting.floor.floorX += game->raycasting.floor.floorStepX;
 		game->raycasting.floor.floorY += game->raycasting.floor.floorStepY;
 		color = ft_get_pixel(&game->textures[4], tx, ty);
-		ft_put_pixel_base(&game->img, game->raycasting.floor.x, y, 0x562b00);
-		color = ft_get_pixel(&game->textures[4], tx, ty);
+		ft_put_pixel_base(&game->img, game->raycasting.floor.x, y, color);
+		color = ft_get_pixel(&game->textures[6], tx, ty);
 		ft_put_pixel_base(&game->img, game->raycasting.floor.x, \
-			(game->camera.ris_y - y - 1), 0x00ccff);
+			(game->camera.ris_y - y - 1), color);
 		game->raycasting.floor.x++;
 	}
 }
