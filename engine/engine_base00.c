@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine_base00.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 14:43:47 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/15 02:02:29 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/15 17:52:09 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ static void	ft_support_floor_casting(t_game *game)
 static void	ft_floor_casting(t_game *game, int y)
 {
 	game->raycasting.floor.rayDirX0 = game->player.dir_x \
-		- game->player.plane_x;
+		 - game->player.plane_x;
 	game->raycasting.floor.rayDirY0 = game->player.dir_y \
-		- game->player.plane_y;
+		 - game->player.plane_y;
 	game->raycasting.floor.rayDirX1 = game->player.dir_x \
-		+ game->player.plane_x;
+		 + game->player.plane_x;
 	game->raycasting.floor.rayDirY1 = game->player.dir_y \
-		+ game->player.plane_y;
+		 + game->player.plane_y;
 	game->raycasting.floor.p = y - game->camera.ris_y / 2;
 	game->raycasting.floor.posZ = 0.5 * game->camera.ris_y;
 	game->raycasting.floor.rowDistance = game->raycasting.floor.posZ \
@@ -76,8 +76,8 @@ void	ft_route_casting(t_game *game)
 		game->raycasting.sprite_casting.spriteOrder[i] = i;
 		game->raycasting.sprite_casting.spriteDistance[i] = \
 			((game->player.pos_x - game->sprites[i].x) * (game->player.pos_x \
-			- game->sprites[i].x) + (game->player.pos_y \
-			- game->sprites[i].y) * (game->player.pos_y - game->sprites[i].y));
+			 - game->sprites[i].x) + (game->player.pos_y \
+			 - game->sprites[i].y) * (game->player.pos_y - game->sprites[i].y));
 		i++;
 	}
 	ft_support_route_casting(game);
@@ -86,12 +86,12 @@ void	ft_route_casting(t_game *game)
 void	ft_raycasting(t_game *game)
 {
 	game->raycasting.sprite_casting.ZBuffer = malloc(sizeof(double) \
-			* game->camera.ris_x);
+			 * game->camera.ris_x);
 	game->raycasting.sprite_casting.numSprites = game->sprites_counter;
 	game->raycasting.sprite_casting.spriteOrder = malloc(sizeof(int) \
-			* game->sprites_counter);
+			 * game->sprites_counter);
 	game->raycasting.sprite_casting.spriteDistance = malloc(sizeof(double) \
-		* game->sprites_counter);
+		 * game->sprites_counter);
 	ft_init_texture(game);
 	game->raycasting.sprite_casting.y = game->camera.ris_y / 2 + 1;
 	ft_route_casting(game);

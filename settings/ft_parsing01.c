@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing01.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:53:45 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 22:28:17 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/15 19:35:09 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ t_config	ft_parsing(int ac, char **av)
 	{
 		config = ft_init_parse_one(ac, av, pars, config);
 		config.map_def = ft_convert(&config);
+		printf("Mappa Caricata: \n");
+		printf("\nMappa Valida: %d", is_map_valid(&config));
+		fflush(stdout);
 		if (config.map_line)
 			config.start_game = TRUE;
 		return (config);

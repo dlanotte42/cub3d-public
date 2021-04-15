@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_button.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 21:43:46 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/13 21:44:58 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/15 17:57:46 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	onPressButton(int keycode, t_game *game)
 	if (keycode == LEFT_KEY)
 		game->movement.cam_left = TRUE;
 	if (keycode == RUN_KEY)
-		game->player.speed += 0.000090;
+		game->player.speed += 0.000180;
 	if (keycode == DRUNK_KEY)
 		ft_mods(keycode, game);
 	if (keycode == TAP_KEY)
@@ -67,6 +67,6 @@ int	onReleseButton(int keycode, t_game *game)
 	if (keycode == LEFT_KEY)
 		game->movement.cam_left = FALSE;
 	if (keycode == RUN_KEY)
-		game->player.speed = 0.000090;
+		game->player.speed = 0.000180;
 	return (0);
 }

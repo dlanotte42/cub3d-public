@@ -3,16 +3,27 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+         #
+#    By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:19:58 by dlanotte          #+#    #+#              #
-#    Updated: 2021/04/15 02:15:58 by zxcvbinz         ###   ########.fr        #
+#    Updated: 2021/04/15 19:11:22 by dlanotte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 COLOR_OFF   = "\033[0m"       # Text Reset
 GREEN       = "\033[0;32m"        # Green
 WHITE       = "\033[0;37m"        # White
+#-*-*-*-*--*-*- Makefile -*-*-*-*--*-*-
+# ▄████▄      █    ██     ▄▄▄▄        █████▓    ▓█████▄ 
+#▒██▀ ▀█      ██  ▓██▒   ▓█████▄      ▀   █▓    ▒██▀ ██▌
+#▒▓█    ▄    ▓██  ▒██░   ▒██▒ ▄██       ███▒    ░██   █▌
+#▒▓▓▄ ▄██▒   ▓▓█  ░██░   ▒██░█▀       ▄  █▓▒    ░▓█▄   ▌
+#▒ ▓███▀ ░   ▒▒█████▓    ░▓█  ▀█▓    ▒████▒░    ░▒████▓ 
+#░ ░▒ ▒  ░   ░▒▓▒ ▒ ▒    ░▒▓███▀▒    ░ ░▒ ░░     ▒▒▓  ▒ 
+#  ░  ▒      ░░▒░ ░ ░    ▒░▒   ░     ░  ░ ░      ░ ▒  ▒ 
+#░            ░░░ ░ ░     ░    ░       ░        
+#░ ░     by      ░        ░ dlanotte░  ░        
+#░                             ░          
 #-*-*-*-*--*-*- Makefile -*-*-*-*--*-*-
 
 NAME = cub3D
@@ -30,7 +41,8 @@ OBJS =  $(SRCS:.c=.o)
 	@ $(CC) $(CFLAGS) -Imlx -c $< -o $@
 	
 $(NAME): $(OBJS)
-	@ echo "Building the project..."
+	@ sed -n 17,26p Makefile | cut -c 2-;
+	@ echo "\nBuilding the project..."
 	@ make -s -C mlx
 	@ mv mlx/${LIB} .
 	@ $(CC) -Lmlx  ${LIB} -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)

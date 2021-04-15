@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bitmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 14:58:00 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 22:33:00 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/15 17:58:14 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	screenshot(t_game *s)
 	int	fd;
 
 	fd = open("screenshot/screenshot.bmp", O_CREAT \
-		| O_WRONLY | O_TRUNC, S_IRWXU);
+		 | O_WRONLY | O_TRUNC, S_IRWXU);
 	bitmap_file(s, fd);
 	bitmap_image(s, fd);
 	bitmap_data(s, fd);

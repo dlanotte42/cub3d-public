@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine_base01.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 00:00:59 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/15 02:13:12 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/15 19:39:59 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	ft_print_w_a_t(t_game *game, int drawStart, int drawEnd, int texX)
 	while (game->raycasting.y < drawEnd)
 	{
 		texY = (int)texPos \
-			& (game->textures[game->raycasting.textNum].height - 1);
+			 & (game->textures[game->raycasting.textNum].height - 1);
 		texPos += step;
 		color = ft_get_pixel(&game->textures[game->raycasting.textNum], \
 			texX, texY);
@@ -73,10 +73,10 @@ double	*ft_raycasting_extra(t_game *game, double *ZBuffer, int texX)
 		game = ft_raycast_zero(game, game->map);
 		if (game->raycasting.side == 0)
 			wallX = game->player.pos_y + game->raycasting.perpWallDist \
-				* game->raycasting.rayDirY;
+				 * game->raycasting.rayDirY;
 		else
 			wallX = game->player.pos_x + game->raycasting.perpWallDist \
-				* game->raycasting.rayDirX;
+				 * game->raycasting.rayDirX;
 		wallX -= floor((wallX));
 		texX = (int)(wallX * (double) \
 		(game->textures[game->raycasting.textNum].width));
@@ -106,8 +106,8 @@ void	ft_cs(t_game *game, int numSprites, double *ZBuffer, int *spriteOrder)
 			game->raycasting.sprite_create.texX = (int)(256 * \
 				(game->raycasting.sprite_create.stripe - \
 				(-game->raycasting.sprite_create.spriteWidth / 2 \
-				+ game->raycasting.sprite_create.spriteScreenX)) \
-				* game->textures[5].width / \
+				 + game->raycasting.sprite_create.spriteScreenX)) \
+				 * game->textures[5].width / \
 				game->raycasting.sprite_create.spriteWidth) / 256;
 			if (game->raycasting.sprite_create.transformY > 0 && \
 			game->raycasting.sprite_create.stripe > 0 && \
