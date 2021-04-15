@@ -6,7 +6,7 @@
 /*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:53:45 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/14 22:28:16 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/15 23:13:25 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ int	ft_strcmp(const char *s1, const char *s2)
 
 void	config_init(t_config *config)
 {
-	config->ris_x = 1920;
-	config->ris_y = 1080;
-	config->c_color = 0x89F1F1;
-	config->f_color = 0xBABBBB;
-	config->n_wall = "../textures/mariowall1.xpm";
+	config->ris_x = 0;
+	config->ris_y = 0;
+	config->c_color = 0;
+	config->f_color = 0;
+	config->n_wall = "null";
 }
 
 void	check_floor(t_config *config)
