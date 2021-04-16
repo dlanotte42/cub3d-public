@@ -1,0 +1,48 @@
+# VALID
+
+(t_config) config = {
+  ris_x = 1080
+  ris_y = 720
+  f_color = 6579200
+  c_color = 6888960
+  n_wall = 0x0000000100209770 "./texture/bluestone.xpm"
+  e_wall = 0x000000010020c0b0 "./texture/greystone.xpm"
+  s_wall = 0x000000010020c030 "./texture/colorstone.xpm"
+  w_wall = 0x000000010020c050 "./texture/purplestone.xpm"
+  sprite_tex = 0x000000010020c100 "./texture/pillar.xpm"
+  map = 0x000000010021dae0
+  map_def = 0x000000010021e4b0
+  array = 0x000000010021d540
+  map_line = 32
+  screenshot = 0
+  start_x = 24
+  start_y = 40
+  direction = 'N'
+  start_game = 0
+  number_sprite = 0
+}
+
+
+# NOT VALID
+
+(t_config) config = {
+  ris_x = 0
+  ris_y = 0
+  f_color = 0
+  c_color = 0
+  n_wall = 0x0000000100007ea1 "null"
+  e_wall = 0x0000000000000000
+  s_wall = 0x0000000000000000
+  w_wall = 0x0000000000000000
+  sprite_tex = 0x0000000000000000
+  map = 0x0000000000000000
+  map_def = 0x0000000100407b10
+  array = 0x0000000000000000
+  map_line = 0
+  screenshot = 0
+  start_x = 0
+  start_y = 0
+  direction = '\0'
+  start_game = 0
+  number_sp
+}

@@ -6,7 +6,7 @@
 #    By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:19:58 by dlanotte          #+#    #+#              #
-#    Updated: 2021/04/16 00:03:58 by zxcvbinz         ###   ########.fr        #
+#    Updated: 2021/04/16 16:16:27 by zxcvbinz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ SETTINGS = settings/ft_libft_functions00.c \
 		   settings/ft_parsing03.c \
 		   settings/ft_player_settings.c \
 		   settings/ft_split_files.c \
-		   settings/settings.c
+		   settings/settings.c \
+		   settings/check_config.c
 
 MOVEMENT = movement/ft_movement.c \
 		   movement/ft_button.c
@@ -85,6 +86,12 @@ bonus: $(OBJS) $(OBJSB)
 	@ echo ${COLOR_OFF} "\nDeleted *.o files" ${GREEN} "[OK]\n" 
 	@ ./cub3D maps/map_bonus.cub
 
+debug:
+	@ sed -n 17,26p Makefile | cut -c 2-;
+	@ echo "\nBuilding the bonus project..."
+	@ make -s -C mlx
+	@ mv mlx/${LIB} .
+	@ $(CC) -Lmlx -g ${LIB} -framework OpenGL -framework AppKit $(SRCS) $(SRCSS) -o $(NAME)
 clean:
 	@ rm -f ${OBJS} ${OBJSB} $(OBJSS)
 	@ make clean -C mlx 

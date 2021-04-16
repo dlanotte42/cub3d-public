@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 23:43:58 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/15 18:42:21 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/16 16:11:54 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ t_config	*ft_s_pla_start(int map_position, t_config \
 				*config, int x, int y);
 size_t		ft_intlen(int *str);
 int			is_map_valid(t_config *config);
+t_config	is_valid(t_config config);
 
 #endif

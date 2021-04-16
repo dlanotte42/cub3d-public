@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing01.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:53:45 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/15 19:35:09 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/16 16:43:42 by zxcvbinz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_custom_isdigit(char c)
 	if (ft_isdigit(c))
 		if (((c - 48) > -1 && (c - 48) < 3))
 			return (1);
+	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+		return (1);
 	return (0);
 }
 
@@ -36,7 +38,7 @@ int	ft_check_maps(char *maps)
 			i++;
 		}
 	}
-	if (counter > 3)
+	if (counter > 2)
 		return (1);
 	return (0);
 }
@@ -93,10 +95,7 @@ t_config	ft_parsing(int ac, char **av)
 		config = ft_init_parse_one(ac, av, pars, config);
 		config.map_def = ft_convert(&config);
 		printf("Mappa Caricata: \n");
-		printf("\nMappa Valida: %d", is_map_valid(&config));
-		fflush(stdout);
-		if (config.map_line)
-			config.start_game = TRUE;
+		config = is_valid(config);
 		return (config);
 	}
 	else
