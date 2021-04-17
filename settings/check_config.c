@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:04:50 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/16 16:40:39 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/17 18:51:32 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static int	is_config_valid(t_config config)
 
 t_config	is_valid(t_config config)
 {
-	int valid;
-	
+	int	valid;
+
 	valid = is_map_valid(&config);
 	fflush(stdout);
 	if (valid == 1)
@@ -66,4 +66,22 @@ t_config	is_valid(t_config config)
 	else
 		printf("\nMappa non valida");
 	return (config);
+}
+
+int	ft_check_rgb(int r, int g, int b)
+{
+	if ((r < 0 || r > 255))
+		return (errorn(2));
+	if ((g < 0 || g > 255))
+		return (errorn(2));
+	if ((b < 0 || b > 255))
+		return (errorn(2));
+	return (1);
+}
+
+int	ft_check_array(char **array)
+{
+	if (array[0] && array[1] && array[2])
+		return (1);
+	return (0);
 }

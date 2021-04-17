@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+         #
+#    By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 14:19:58 by dlanotte          #+#    #+#              #
-#    Updated: 2021/04/16 16:16:27 by zxcvbinz         ###   ########.fr        #
+#    Updated: 2021/04/17 18:24:08 by dlanotte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,17 +75,6 @@ $(NAME): $(OBJS) $(OBJSS)
 	@ echo ${COLOR_OFF} "\nDeleted *.o files" ${GREEN} "[OK]\n" 
 	@ ./cub3D maps/map.cub
 	
-bonus: $(OBJS) $(OBJSB)
-	@ sed -n 17,26p Makefile | cut -c 2-;
-	@ echo "\nBuilding the bonus project..."
-	@ make -s -C mlx
-	@ mv mlx/${LIB} .
-	@ $(CC) -Lmlx  ${LIB} -framework OpenGL -framework AppKit $(OBJS) $(OBJSB) -o $(NAME)
-	@ echo  "\nBuilding" ${GREEN} "[OK]"
-	@ make clean
-	@ echo ${COLOR_OFF} "\nDeleted *.o files" ${GREEN} "[OK]\n" 
-	@ ./cub3D maps/map_bonus.cub
-
 debug:
 	@ sed -n 17,26p Makefile | cut -c 2-;
 	@ echo "\nBuilding the bonus project..."
@@ -102,4 +91,4 @@ fclean: clean
 
 re:	fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:52:41 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/15 23:58:05 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/17 18:12:56 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,8 @@ typedef struct s_game{
 	t_sprite		*sprites;
 	int				sprites_counter;
 	int				start;
+	int				f_color;
+	int				c_color;
 }				t_game;
 
 typedef struct s_pars

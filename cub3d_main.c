@@ -6,7 +6,7 @@
 /*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 16:43:37 by dlanotte          #+#    #+#             */
-/*   Updated: 2021/04/15 17:47:01 by dlanotte         ###   ########.fr       */
+/*   Updated: 2021/04/17 18:45:24 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,21 @@ int	render_game_loop(t_game *game)
 	if (game->camera.screenshot_game)
 		screenshot(game);
 	ft_re_create_img(game);
-	mlx_mouse_hide();
+	return (0);
+}
+
+int	clean_leaks(t_game *game)
+{
+	free(game->map);
+	free(game->sprites);
+	mlx_destroy_window(game->vars.mlx, game->vars.win);
+	exit(0);
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	t_game	game;
+	t_game		game;
 
 	ft_set_parameters(&game, argc, argv);
 	if (game.start == TRUE)
@@ -39,6 +47,7 @@ int	main(int argc, char **argv)
 		ft_init_mlx(&game);
 		mlx_hook(game.vars.win, 2, 0L, onPressButton, &game);
 		mlx_hook(game.vars.win, 3, 0L, onReleseButton, &game);
+		mlx_hook(game.vars.win, 17, 0L, clean_leaks, &game);
 		game.img.img = mlx_new_image(game.vars.mlx, game.camera.ris_x, \
 				game.camera.ris_y);
 		game.img.addr = mlx_get_data_addr(game.img.img, \

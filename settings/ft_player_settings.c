@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_player_settings.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zxcvbinz <zxcvbinz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlanotte <dlanotte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:11:55 by zxcvbinz          #+#    #+#             */
-/*   Updated: 2021/04/15 23:22:27 by zxcvbinz         ###   ########.fr       */
+/*   Updated: 2021/04/17 18:53:38 by dlanotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	ft_mapcheck(t_config *s)
 			else if (ft_is(1, s->map[i][j]) == 0 && j == 0)
 				return (-1);
 			else if (ft_is(1, s->map[i][j]) == 0 && j == \
-				(int)(ft_strlen(s->map[i]) - (size_t)1))
+				(int)(ft_strlen(s->map[i]) - (size_t) 1))
 				return (-1);
 			j++;
 		}
